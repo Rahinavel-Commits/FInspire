@@ -100,7 +100,6 @@
             overflow: hidden;
         }
 
-        /* Header Row Fix (Desktop & Mobile) */
         .mobile-header-row {
             display: flex;
             align-items: center;
@@ -147,7 +146,6 @@
             z-index: 5;
         }
 
-        /* --- Animation classes --- */
         .club-highlight {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
@@ -258,59 +256,107 @@
 
         .event-card.active .card-details { max-height: 150px; margin-top: 15px; }
 
-        /* --- Footer --- */
-        footer {
-            padding: 60px 8% 40px;
-            background: #1a0014;
-            border-top: 1px solid var(--gold);
-            color: var(--cream);
-            display: flex;
-            flex-direction: column;
-        }
+        /* --- Footer Styling --- */
+footer { 
+    padding: 80px 5% 40px; 
+    background: #1a0014; 
+    border-top: 1px solid rgba(212, 175, 55, 0.3); 
+}
 
-        .footer-top {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+.footer-main-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 40px; 
+}
 
-        .footer-reg-button {
-            text-decoration: none;
-            display: inline-block;
-            background: var(--gold-grad);
-            padding: 12px 35px;
-            border-radius: 5px;
-        }
+.footer-column h4 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
 
-        .footer-reg-button .echelon-title {
-            background: none !important;
-            -webkit-background-clip: initial !important;
-            -webkit-text-fill-color: var(--maroon) !important;
-            color: var(--maroon) !important;
-            font-size: 1.8rem;
-            animation: none;
-            opacity: 1;
-            margin: 0;
-        }
+.footer-column p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--cream);
+}
 
-        .footer-main-grid {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1300px;
-            margin: 0 auto;
-            width: 100%;
-        }
+/* --- Actionable Links & Buttons --- */
+.action-link { 
+    color: var(--gold); 
+    text-decoration: none; 
+    transition: var(--transition); 
+    font-weight: 500;
+    display: inline-block;
+}
 
-        .footer-column { flex: 1; min-width: 300px; }
-        .footer-column h4 { font-family: 'Cinzel', serif; color: var(--gold); letter-spacing: 2px; margin-bottom: 25px; font-size: 1.1rem; font-weight: 700; }
-        .footer-column p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 5px; font-family: 'Montserrat', sans-serif; }
-        .footer-column.right { text-align: right; }
-        .email-lowercase { text-transform: lowercase; }
+.action-link:hover {
+    transform: translateX(5px);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
 
-        .social-icons { display: flex; justify-content: flex-end; gap: 15px; margin-top: 15px; }
-        .social-icon { width: 45px; height: 45px; background: var(--gold-grad); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--bg-dark); text-decoration: none; font-size: 1.3rem; }
+.maps-btn { 
+    display: inline-block; 
+    margin-top: 15px; 
+    padding: 12px 25px; 
+    border: 1px solid var(--gold); 
+    color: var(--gold); 
+    text-decoration: none; 
+    font-family: 'Cinzel'; 
+    font-size: 0.75rem; 
+    border-radius: 4px; 
+    transition: var(--transition); 
+}
+
+.maps-btn:hover { 
+    background: var(--gold-grad); 
+    color: var(--maroon); 
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); 
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+/* --- Social Icons --- */
+.footer-column.right-assigned { 
+    text-align: right; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-end; 
+}
+
+.social-icons { 
+    display: flex; 
+    gap: 15px; 
+    margin-top: 25px; 
+}
+
+.social-icon { 
+    width: 45px; 
+    height: 45px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border: 1px solid rgba(212, 175, 55, 0.4); 
+    border-radius: 50%; 
+    color: var(--gold); 
+    text-decoration: none; 
+    transition: var(--transition); 
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--gold);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.social-icon i { transition: var(--transition); }
+.social-icon:hover i { transform: scale(1.2); }
+
+@media (max-width: 768px) { 
+    .footer-column.right-assigned { text-align: left; align-items: flex-start; } 
+}
 
         .copyright { 
             margin-top: 50px; 
@@ -330,8 +376,8 @@
         @media (max-width: 768px) {
             .hero { 
                 padding-top: 100px; 
-                padding-bottom: 30px; /* Reduced padding */
-                min-height: auto; /* Allow content to dictate height to remove gap */
+                padding-bottom: 30px; 
+                min-height: auto; 
                 justify-content: flex-start;
             }
 
@@ -363,7 +409,7 @@
             
             .hero-content {
                 margin-top: 10px;
-                margin-bottom: 0; /* Remove gap below content */
+                margin-bottom: 0;
             }
 
             .echelon-title { 
@@ -373,25 +419,29 @@
 
             .date-box {
                 margin-top: 15px;
-                margin-bottom: 10px; /* Tighten bottom area */
+                margin-bottom: 10px;
             }
 
             .content-section { padding: 40px 5%; }
             .event-grid { grid-template-columns: 1fr; }
             nav ul { gap: 15px; }
             .nav-btn-link { font-size: 0.65rem; }
+
+            /* Mobile Footer alignment instruction */
+            .footer-column.right { text-align: left; }
+            .social-icons { justify-content: flex-start; }
         }
     </style>
 </head>
 <body>
 
     <nav id="navbar">
-    <ul>
-        <li><a href="index.html" class="nav-btn-link">HOME</a></li>
-        <li><a href="events.html" class="nav-btn-link">EVENTS</a></li>
-        <li><a href="contact.html" class="nav-btn-link">CONTACT</a></li>
-    </ul>
-</nav>
+        <ul>
+            <li><a href="index.html" class="nav-btn-link">HOME</a></li>
+            <li><a href="events.html" class="nav-btn-link">EVENTS</a></li>
+            <li><a href="contact.html" class="nav-btn-link">CONTACT</a></li>
+        </ul>
+    </nav>
 
     <section class="hero" id="home">
         <div class="mobile-header-row">
@@ -411,7 +461,7 @@
             
             <p class="presents">Proudly Presents</p>
             <h1 class="echelon-title">ECHELON ’26</h1>
-            <div class="date-box">MARCH 9th & 10th</div>
+            <div class="date-box">MARCH 10th & 11th</div>
         </div>
     </section>
 
@@ -425,17 +475,17 @@
             <div class="event-card" onclick="this.classList.toggle('active')">
                 <h3>Make or Break</h3>
                 <p>Startup Decision Making</p>
-                <div class="card-details">Navigate high-stakes choices where every decision either builds your empire or breaks your foundation. Focuses on resource allocation and pivot strategies.</div>
+                <div class="card-details">Make or Break is a strategic business simulation where participants act as startup founders or consultants tasked with rescuing a failing venture.</div>
             </div>
             <div class="event-card" onclick="this.classList.toggle('active')">
                 <h3>Quizpreneur</h3>
                 <p>Entrepreneurship Quiz</p>
-                <div class="card-details">A battle of wits for the business-savvy. Cover everything from iconic founders to obscure market trends in this rapid-fire knowledge showdown.</div>
+                <div class="card-details">Quizpreneur is an engaging entrepreneurship-based quiz event designed to test participants’ knowledge of business, startups, economics, marketing, and current affairs. </div>
             </div>
             <div class="event-card" onclick="this.classList.toggle('active')">
                 <h3>Behind the Brand</h3>
                 <p>Marketing Analysis</p>
-                <div class="card-details">Peel back the layers of successful global brands. Analyze consumer psychology and the data-driven strategies that lead to market dominance.</div>
+                <div class="card-details">This event tests participants’ ability to analyze real-world marketing strategies of assigned brands. Teams will study a campaign’s success or failure and present their insights. They must also propose innovative solutions, demonstrating strategic thinking and teamwork. </div>
             </div>
             <div class="event-card" onclick="this.classList.toggle('active')">
                 <h3>Identity Unleashed</h3>
@@ -445,48 +495,56 @@
             <div class="event-card" onclick="this.classList.toggle('active')">
                 <h3>Decision Table</h3>
                 <p>Crisis Management</p>
-                <div class="card-details">Manage PR disasters and operational failures under extreme time pressure. Can you stay calm while the brand is under fire?</div>
+                <div class="card-details">Decision Table is a case-based event where teams analyze a business crisis and create a quick, practical solution. The event tests decision-making, teamwork, and problem-solving skills under pressure.</div>
+            </div>
+            <div class="event-card" onclick="this.classList.toggle('active')">
+                <h3>Biz Auction</h3>
+                <p>Strategic Bidding</p>
+                <div class="card-details">Biz Auction is an investment simulation where teams bid on companies to build a high-value portfolio within a fixed budget. The event tests financial insight, planning, and competitive thinking.</div>
             </div>
         </div>
     </section>
 
-    <footer id="contact">
-        <div class="footer-top">
-            <a href="register.html" class="footer-reg-button">
-                <h2 class="echelon-title" style="font-size: 1.8rem;">REGISTER NOW</h2>
+   <footer id="contact">
+    <div class="footer-main-grid">
+        <div class="footer-column">
+            <h4>GET IN TOUCH</h4>
+            <p style="margin-bottom: 10px;">
+                EMAIL: <a href="mailto:rkmvcechelon26@gmail.com" class="action-link">rkmvcechelon26@gmail.com</a>
+            </p>
+            <p>
+                PHONE: <a href="tel:+919677836433" class="action-link">+91 96778 36433</a>
+            </p>
+        </div>
+
+        <div class="footer-column right-assigned">
+            <h4>VISIT US</h4>
+            <p>Ramakrishna Mission Vivekananda College</p>
+            <p>Mylapore, Chennai – 600004</p>
+            <a href="https://maps.google.com/?q=Ramakrishna+Mission+Vivekananda+College+Mylapore" target="_blank" class="maps-btn">
+                VIEW ON GOOGLE MAPS
             </a>
-        </div>
-
-        <div class="footer-main-grid">
-            <div class="footer-column">
-                <h4>GET IN TOUCH</h4>
-                <p>EMAIL: <span class="email-lowercase" style="color: var(--gold)">rkmvcechelon26@gmail.com</span></p>
-                <p>PHONE: +91 96778 36433</p>
-            </div>
-
-            <div class="footer-column right">
-                <h4>VISIT US</h4>
-                <p>Ramakrishna Mission Vivekananda College (RKMVC)</p>
-                <p>70 & 72, P.S. Sivaswami Salai, Mylapore, Chennai – 600004</p>
-                <h4 style="margin-top: 40px; margin-bottom: 15px;">CONTACT US</h4>
-                <div class="social-icons">
-                    <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/919677836433" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-                </div>
+            <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://whatsapp.com/channel/0029VbC9cs0LSmbf7WBFN905" class="social-icon" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
             </div>
         </div>
-
-        <div class="copyright">
+    </div>
+<div class="copyright">
             © 2026 STUDENTPRENEUR CLUB. ALL RIGHTS RESERVED.
         </div>
-    </footer>
+</footer>
+        
 
     <script>
         window.addEventListener('load', () => {
             const t1 = document.getElementById('text1');
             const t2 = document.getElementById('text2');
             
-            // Animation for college text
             setTimeout(() => t1.classList.add('pop-up-visible'), 300);
             setTimeout(() => t2.classList.add('pop-up-visible'), 600);
         });
@@ -499,4 +557,3 @@
     </script>
 </body>
 </html>
-
