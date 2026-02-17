@@ -600,7 +600,7 @@ async function submitFinalRegistration(){
     }
 
     if(result.status === "success"){
-      showSuccess(result.registrationIds);
+      showSuccess(result.registrations);
     } else {
       alert("Registration failed. Try again.");
       submitBtn.disabled = false;
@@ -655,4 +655,5 @@ const toBase64 = file => new Promise((resolve, reject) => {
 </script>
 
 </body>
+
 </html>
