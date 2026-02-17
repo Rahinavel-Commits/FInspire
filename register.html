@@ -591,7 +591,7 @@ async function submitFinalRegistration(){
 
   try {
     // FIXED: Changed Content-Type to text/plain to bypass CORS and script-exec errors
-    const response = await fetch("https://script.google.com/macros/s/AKfycbxKGpW46dGsRM-2AgtvAr8mb1hIY8_1P2eNsC4bAUE5r2s4JZPCgTP3knZTqTALC060/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxdI6pQj73Dwa4LtQx_qFbGoZgVTBnQwXKFyH0crK5M0Ty8jA-B3s5vjgK10X7R0B6W/exec", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: { "Content-Type": "text/plain;charset=utf-8" }
@@ -650,7 +650,7 @@ function showSuccess(registrationIds){
 async function fetchCapacity() {
   try {
     const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbxKGpW46dGsRM-2AgtvAr8mb1hIY8_1P2eNsC4bAUE5r2s4JZPCgTP3knZTqTALC060/exec?action=capacity"
+      "https://script.google.com/macros/s/AKfycbxdI6pQj73Dwa4LtQx_qFbGoZgVTBnQwXKFyH0crK5M0Ty8jA-B3s5vjgK10X7R0B6W/exec?action=capacity"
     );
     return await res.json();
   } catch (e) {
@@ -669,6 +669,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
 
 </body>
 </html>
+
 
 
 
