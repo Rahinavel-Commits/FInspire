@@ -373,13 +373,18 @@ function toggleDate(date,el){
   }
 }
 
-function goToEvents(){
-  if(selectedDates.length===0){ alert("Selection Required: Please select at least one date."); return; }
-  buildEventOptions();
+async function goToEvents(){
+  if(selectedDates.length===0){
+    alert("Selection Required: Please select at least one date.");
+    return;
+  }
+
+  const liveData = await fetchCapacity();
+  buildEventOptions(liveData);
   nextStep(2);
 }
 
-function buildEventOptions(){
+function buildEventOptions(liveData){
   document.getElementById("march10Events").innerHTML="";
   document.getElementById("march11Events").innerHTML="";
   
@@ -388,7 +393,10 @@ function buildEventOptions(){
     container.innerHTML+=`<h3 style="color:var(--gold); font-family:'Cinzel'; margin: 20px 0 10px;">${date}</h3>`;
     
     eventData[date].forEach(ev=>{
-      const isFull = ev.capacity <= 0;
+      const approvedCount = liveData?.[date]?.[ev.name] || 0;
+const slotsLeft = ev.capacity - approvedCount;
+const isFull = slotsLeft <= 0;
+
       const card = document.createElement('div');
       card.className = `option ${isFull ? 'disabled' : ''}`;
       if(selectedEvents[date] && selectedEvents[date].name === ev.name) card.classList.add('selected');
@@ -398,7 +406,7 @@ function buildEventOptions(){
           <strong>${ev.name}</strong><br>
           <span class="event-meta">₹${ev.fee} per ${ev.type === 'individual' ? 'person' : 'team'}</span>
           <span class="event-meta">${ev.sizeRule}</span>
-          ${isFull ? '<div class="full-tag">EVENT FULL</div>' : `<span class="event-meta" style="color:var(--gold)">Slots Left: ${ev.capacity}</span>`}
+          ${isFull ? '<div class="full-tag">EVENT FULL</div>' : `<span class="event-meta" style="color:var(--gold)">Slots Left: ${slotsLeft}</span>`}
         </div>
       `;
       
@@ -638,6 +646,11 @@ function showSuccess(registrationIds){
 
   document.querySelector(".container").innerHTML = html;
 }
+async function fetchCapacity() {
+  const res = await fetch("https://script.google.com/macros/s/AKfycby844sFqd-YJZKj0uK6sypSsiJEnFEgCg5zcSfTN4u6cL2pXanjQiIQYMo3YBS8WqLr/exec?action=capacity");
+  return await res.json();
+}
+
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -649,5 +662,4 @@ const toBase64 = file => new Promise((resolve, reject) => {
 
 </body>
 </html>
-
 
