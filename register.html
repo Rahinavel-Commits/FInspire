@@ -332,6 +332,20 @@ button:disabled { opacity: 0.6; cursor: not-allowed; border-color: gray; color: 
 </div>
 
 <script>
+// Required for capacity fallback calculations
+const EVENT_CONFIG = {
+  "March 10": {
+    "Make or Break": { capacity: 35 },
+    "Quizpreneur": { capacity: 50 },
+    "Behind the Brand": { capacity: 20 }
+  },
+  "March 11": {
+    "Biz Auction": { capacity: 15 },
+    "Decision Table": { capacity: 30 },
+    "Identity Unleashed": { capacity: 100 }
+  }
+};
+
 const eventData = {
   "March 10": [
     {name:"Make or Break", fee:150, type:"team", sizeRule: "Team Size: 2–4 Members"},
@@ -406,9 +420,8 @@ function buildEventOptions(liveData){
     container.innerHTML += `<h3 style="color:var(--gold); font-family:'Cinzel'; margin: 20px 0 10px;">${date}</h3>`;
     
     eventData[date].forEach(ev => {
-      // Logic: Use liveData if available, fallback to 30 capacity
       const approvedCount = liveData?.[date]?.[ev.name]?.approved || 0;
-      const totalCapacity = 30; // Standard fallback
+      const totalCapacity = EVENT_CONFIG?.[date]?.[ev.name]?.capacity || 30; 
       const slotsLeft = totalCapacity - approvedCount;
       const isFull = slotsLeft <= 0;
 
@@ -574,36 +587,36 @@ async function submitFinalRegistration(){
   submitBtn.disabled = true;
   submitBtn.innerText = "Submitting...";
 
-  const base64Image = await toBase64(fileInput.files[0]);
-
-  const payload = {
-    selectedEvents: Object.keys(selectedEvents).map(date => {
-      const ev = selectedEvents[date];
-      const participants = [];
-      const count = (ev.type === "individual") ? 1 : 4;
-
-      for(let i=1; i<=count; i++){
-        let name = document.getElementById(`${date}-p${i}-name`).value.trim();
-        let phone = document.getElementById(`${date}-p${i}-phone`).value.trim();
-        if(name) participants.push({ name, phone });
-      }
-
-      return {
-        date: date,
-        eventName: ev.name,
-        fee: ev.fee,
-        email: document.getElementById(`${date}-email`).value.trim(),
-        college: document.getElementById('common-college').value.trim(),
-        department: document.getElementById('common-dept').value.trim(),
-        participants: participants
-      };
-    }),
-    totalAmount: parseInt(document.getElementById("totalAmount").innerText),
-    transactionId: txn,
-    paymentScreenshotBase64: base64Image
-  };
-
   try {
+    const base64Image = await toBase64(fileInput.files[0]);
+
+    const payload = {
+      selectedEvents: Object.keys(selectedEvents).map(date => {
+        const ev = selectedEvents[date];
+        const participants = [];
+        const count = (ev.type === "individual") ? 1 : 4;
+
+        for(let i=1; i<=count; i++){
+          let name = document.getElementById(`${date}-p${i}-name`).value.trim();
+          let phone = document.getElementById(`${date}-p${i}-phone`).value.trim();
+          if(name) participants.push({ name, phone });
+        }
+
+        return {
+          date: date,
+          eventName: ev.name,
+          fee: ev.fee,
+          email: document.getElementById(`${date}-email`).value.trim(),
+          college: document.getElementById('common-college').value.trim(),
+          department: document.getElementById('common-dept').value.trim(),
+          participants: participants
+        };
+      }),
+      totalAmount: parseInt(document.getElementById("totalAmount").innerText),
+      transactionId: txn,
+      paymentScreenshotBase64: base64Image
+    };
+
     const response = await fetch("https://script.google.com/macros/s/AKfycbxbH_66Mnzr9yFMlSlpQrjLNFp2z6tzuI4g3VIkyrvFYl-1utiS-2DDHBWcCSJkGjw/exec", {
       method: "POST",
       body: JSON.stringify(payload),
@@ -681,6 +694,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
 </script>
 </body>
 </html>
+
 
 
 
