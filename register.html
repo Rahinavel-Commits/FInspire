@@ -647,10 +647,16 @@ function showSuccess(registrationIds){
   document.querySelector(".container").innerHTML = html;
 }
 async function fetchCapacity() {
-  const res = await fetch("https://script.google.com/macros/s/AKfycby844sFqd-YJZKj0uK6sypSsiJEnFEgCg5zcSfTN4u6cL2pXanjQiIQYMo3YBS8WqLr/exec?action=capacity");
-  return await res.json();
+  try {
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycby844sFqd-YJZKj0uK6sypSsiJEnFEgCg5zcSfTN4u6cL2pXanjQiIQYMo3YBS8WqLr/exec?action=capacity"
+    );
+    return await res.json();
+  } catch (e) {
+    console.error("Capacity fetch failed:", e);
+    return {};
+  }
 }
-
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -662,4 +668,5 @@ const toBase64 = file => new Promise((resolve, reject) => {
 
 </body>
 </html>
+
 
