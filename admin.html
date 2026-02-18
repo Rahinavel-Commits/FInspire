@@ -109,7 +109,7 @@
 
   async function loadData() {
     try {
-      const response = await fetch(`${https://script.google.com/macros/s/AKfycbwQ-gpSMeAOj16NvUkH1j827Vxln4bFCwOyIDuk8yJO6TuJYy22dYkL40OFvo07JZwd/exec}?action=getAdminData&key=${SECRET_KEY}`);
+      const response = await fetch(`${SCRIPT_URL}?action=getAdminData&key=${SECRET_KEY}`);
       const data = await response.json();
       fullData = data.rows;
       eventConfig = data.config;
@@ -200,4 +200,5 @@
 </body>
 
 </html>
+
 
