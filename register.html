@@ -620,7 +620,7 @@ async function submitFinalRegistration(){
       paymentScreenshotBase64: base64Image
     };
 
-    const response = await fetch("https://script.google.com/macros/s/AKfycbwvbcXVYjco-4Mi1Gr98uzE8dpuuoBp_kjIJBey-EXLIikGXDv8kQ4EgE5pcbkWRC0U/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzgyvv9eJNuBccMvWVsp4kUpzdYQYdl5xujKMHwSVo5QqQGmzMXiGlS705mT8ecdo8/exec", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: { "Content-Type": "text/plain;charset=utf-8" }
@@ -679,7 +679,7 @@ function showSuccess(registrationIds){
 async function fetchCapacity() {
   try {
     const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbwvbcXVYjco-4Mi1Gr98uzE8dpuuoBp_kjIJBey-EXLIikGXDv8kQ4EgE5pcbkWRC0U/exec?action=capacity"
+      "https://script.google.com/macros/s/AKfycbzgyvv9eJNuBccMvWVsp4kUpzdYQYdl5xujKMHwSVo5QqQGmzMXiGlS705mT8ecdo8/exec?action=capacity"
     );
     return await res.json();
   } catch (e) {
@@ -697,6 +697,7 @@ const toBase64 = file => new Promise((resolve, reject) => {
 </script>
 </body>
 </html>
+
 
 
 
