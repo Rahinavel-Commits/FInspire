@@ -335,23 +335,13 @@ function validateStep3() {
   const college = document.getElementById('common-college').value.trim();
   const dept = document.getElementById('common-dept').value.trim();
   
-  if (!college || !dept) { 
-    alert("⚠️ Please enter your College and Department details."); 
-    return; 
-  }
-
-  // Regex to check if a string contains exactly 10 digits
+  if (!college || !dept) { alert("⚠️ Please enter your College and Department details."); return;}
   const phoneRegex = /^[0-9]{10}$/;
-
-  for (let date in selectedEvents) {
-    let ev = selectedEvents[date];
+for (let date in selectedEvents) { let ev = selectedEvents[date];
     let email = document.getElementById(`${date}-email`).value.trim();
     
     // Basic Email Check
-    if (!email || !email.includes('@')) { 
-      alert(`⚠️ Valid email required for ${ev.name}.`); 
-      return; 
-    }
+ if (!email || !email.includes('@')) { alert(`⚠️ Valid email required for ${ev.name}.`); return;  }
 
     let count = (ev.type === "individual") ? 1 : 4;
     for (let i = 1; i <= count; i++) {
@@ -366,30 +356,10 @@ function validateStep3() {
       // Check if this participant is mandatory
       let isMandatory = (ev.type === "individual" || ev.type === "biz" || i <= 2);
 
-      if (isMandatory) {
-        if (!name) {
-          alert(`⚠️ Participant ${i} Name is required for ${ev.name}.`);
-          return;
-        }
-        if (!phoneRegex.test(phone)) {
-          alert(`⚠️ Participant ${i} needs a valid 10-digit Phone Number for ${ev.name}. (No alphabets allowed)`);
-          phoneField.focus();
-          return;
-        }
-      } else {
+      if (isMandatory) { if (!name) { alert(`⚠️ Participant ${i} Name is required for ${ev.name}.`); return; }
+        if (!phoneRegex.test(phone)) { alert(`⚠️ Participant ${i} needs a valid 10-digit Phone Number for ${ev.name}. (No alphabets allowed)`);phoneField.focus();return; } } else {
         // For optional participants: if one field is filled, the other must be valid too
-        if (name || phone) {
-          if (!name || !phoneRegex.test(phone)) {
-            alert(`⚠️ Please complete optional Participant ${i} details with a valid 10-digit number or leave both blank.`);
-            phoneField.focus();
-            return;
-          }
-        }
-      }
-    }
-  }
-  nextStep(4);
-}
+        if (name || phone) { if (!name || !phoneRegex.test(phone)) { alert(`⚠️ Please complete optional Participant ${i} details with a valid 10-digit number or leave both blank.`);phoneField.focus(); return;}}}}}nextStep(4);}
 
 function buildPaymentSummary(){
   let total=0; let html=`<div style="font-family:'Montserrat'; font-size:0.9rem;">`;
@@ -442,4 +412,5 @@ window.onclick = function(event){ if(event.target == document.getElementById("he
 </script>
 </body>
 </html>
+
 
