@@ -326,12 +326,70 @@ function participantFields(ev, date){
   let html = ""; let count = (ev.type === "individual") ? 1 : 4;
   for(let i=1; i<=count; i++){
     let isReq = (ev.type === "individual" || ev.type === "biz" || i <= 2) ? "required" : "";
-    html += `<div class="participant-section"><span class="participant-title">Participant ${i} ${isReq ? '' : '(Optional)'}</span><div class="input-grid"><div class="input-wrapper"><i class="fas fa-user"></i><input id="${date}-p${i}-name" placeholder="Name" ${isReq}></div><div class="input-wrapper"><i class="fas fa-phone"></i><input type="tel" id="${date}-p${i}-phone" placeholder="Phone" maxlength="10" ${isReq}></div></div></div>`;
+    html += `<div class="participant-section"><span class="participant-title">Participant ${i} ${isReq ? '' : '(Optional)'}</span><div class="input-grid"><div class="input-wrapper"><i class="fas fa-user"></i><input id="${date}-p${i}-name" placeholder="Name" ${isReq}></div><div class="input-wrapper"><i class="fas fa-phone"><input type="tel" id="${date}-p${i}-phone"placeholder="10-digit Phone"maxlength="10" ${isReq} oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div></div></div>`;
   }
   return html;
 }
 
-function validateStep3(){ if(!document.getElementById('common-college').value.trim()){ alert("Missing Common Details."); return; } nextStep(4); }
+function validateStep3() {
+  const college = document.getElementById('common-college').value.trim();
+  const dept = document.getElementById('common-dept').value.trim();
+  
+  if (!college || !dept) { 
+    alert("⚠️ Please enter your College and Department details."); 
+    return; 
+  }
+
+  // Regex to check if a string contains exactly 10 digits
+  const phoneRegex = /^[0-9]{10}$/;
+
+  for (let date in selectedEvents) {
+    let ev = selectedEvents[date];
+    let email = document.getElementById(`${date}-email`).value.trim();
+    
+    // Basic Email Check
+    if (!email || !email.includes('@')) { 
+      alert(`⚠️ Valid email required for ${ev.name}.`); 
+      return; 
+    }
+
+    let count = (ev.type === "individual") ? 1 : 4;
+    for (let i = 1; i <= count; i++) {
+      let nameField = document.getElementById(`${date}-p${i}-name`);
+      let phoneField = document.getElementById(`${date}-p${i}-phone`);
+      
+      if (!nameField) continue; // Safety check
+
+      let name = nameField.value.trim();
+      let phone = phoneField.value.trim();
+
+      // Check if this participant is mandatory
+      let isMandatory = (ev.type === "individual" || ev.type === "biz" || i <= 2);
+
+      if (isMandatory) {
+        if (!name) {
+          alert(`⚠️ Participant ${i} Name is required for ${ev.name}.`);
+          return;
+        }
+        if (!phoneRegex.test(phone)) {
+          alert(`⚠️ Participant ${i} needs a valid 10-digit Phone Number for ${ev.name}. (No alphabets allowed)`);
+          phoneField.focus();
+          return;
+        }
+      } else {
+        // For optional participants: if one field is filled, the other must be valid too
+        if (name || phone) {
+          if (!name || !phoneRegex.test(phone)) {
+            alert(`⚠️ Please complete optional Participant ${i} details with a valid 10-digit number or leave both blank.`);
+            phoneField.focus();
+            return;
+          }
+        }
+      }
+    }
+  }
+  nextStep(4);
+}
 
 function buildPaymentSummary(){
   let total=0; let html=`<div style="font-family:'Montserrat'; font-size:0.9rem;">`;
@@ -384,3 +442,4 @@ window.onclick = function(event){ if(event.target == document.getElementById("he
 </script>
 </body>
 </html>
+
