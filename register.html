@@ -212,7 +212,7 @@ button:hover { background: var(--gold-grad); color: var(--maroon); }
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEx4wU3R36sm3bBSN_OtHB4BwQjowSbiUlBCe4OMy2rR7hYcLawNMJI34T0N_r_ZbX/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxPd_W2oubBIfP66xI-tZ12msCNhKfBZKYX6s8W6Rw08irR5ncyhEwbTF2yhp-jxlU2/exec";
 
 const EVENT_CONFIG = {
   "March 10": { "Make or Break": { capacity: 35 }, "Quizpreneur": { capacity: 50 }, "Behind the Brand": { capacity: 20 } },
@@ -359,7 +359,7 @@ async function submitFinalRegistration(){
       transactionId: document.getElementById("txnId").value,
       paymentScreenshotBase64: base64
     };
-    const res = await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) });
+    const res = await fetch(SCRIPT_URL, {method: "POST",body: JSON.stringify(payload),mode: 'no-cors'});
     const result = await res.json();
     if(result.status === "success") showSuccess(result.registrations.map(r=>r.registrationId));
     else alert(result.message);
@@ -381,4 +381,5 @@ window.onclick = function(event){ if(event.target == document.getElementById("he
 </script>
 </body>
 </html>
+
 
