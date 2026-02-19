@@ -62,7 +62,7 @@ body {
 h1 { font-family: 'Cinzel', serif; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; font-size: 2rem; margin-bottom: 10px; }
 h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.2rem; margin-bottom: 25px; text-align: center; letter-spacing: 2px; }
 
-/* MODAL / POPUP STYLES */
+/* MODAL */
 .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
 .modal-content { background: var(--maroon); margin: 5% auto; padding: 30px; border: 2px solid var(--gold); width: 90%; max-width: 600px; border-radius: 15px; color: white; position: relative; max-height: 80vh; overflow-y: auto; }
 .close-modal { position: absolute; right: 20px; top: 15px; font-size: 24px; color: var(--gold); cursor: pointer; }
@@ -80,28 +80,15 @@ h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.2rem; margin
 
 .option { padding: 20px; border: 1px solid rgba(212, 175, 55, 0.3); background: rgba(255,255,255,0.03); border-radius: 10px; cursor: pointer; transition: var(--transition); margin-bottom: 15px; }
 .option:hover:not(.disabled) { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
-.option.selected {
-  background: var(--gold-grad) !important;
-  color: var(--maroon) !important;
-  border-color: transparent !important;
-  font-weight: 700 !important;
-  opacity: 1 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-}
-
-/* This prevents the "transparent" flicker when clicking */
-.option.selected:hover {
-  background: var(--gold-grad) !important;
-  color: var(--maroon) !important;
-}
+.option.selected { background: var(--gold-grad) !important; color: var(--maroon) !important; border-color: transparent !important; font-weight: 700 !important; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+.option.selected:hover { background: var(--gold-grad) !important; color: var(--maroon) !important; }
 .option.disabled { opacity: 0.5; cursor: not-allowed; border-color: var(--error); }
 .event-meta { font-size: 0.8rem; margin-top: 8px; display: block; opacity: 0.9; }
 
 input { width: 100%; padding: 14px 14px 14px 45px; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); background: var(--input-bg); color: var(--cream); font-family: 'Montserrat', sans-serif; }
 .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 15px; }
 .input-wrapper { position: relative; }
-.input-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gold); }
+.input-wrapper i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gold); z-index: 2; }
 
 .participant-section { border: 1px solid rgba(212, 175, 55, 0.3); padding: 20px; border-radius: 10px; margin-bottom: 20px; }
 .participant-title { color: var(--gold); font-family: 'Cinzel'; font-size: 0.9rem; margin-bottom: 15px; display: block; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 5px; }
@@ -201,29 +188,12 @@ button:hover { background: var(--gold-grad); color: var(--maroon); }
 
 <div id="helpModal" class="modal">
   <div class="modal-content">
-    <span class="close-modal" onclick="closeHelp()">&times;</span>
+    <span class="close-modal" onclick="closeHelp()">×</span>
     <h2 style="margin-bottom:20px;">Registration Guide</h2>
-    
-    <div class="help-step">
-      <strong>1. Selection</strong>
-      <p>Choose your events and enter your details correctly. Ensure team member phone numbers are 10-digits.</p>
-    </div>
-    
-    <div class="help-step">
-      <strong>2. Payment</strong>
-      <p>Scan the QR and pay the total amount. Do not make multiple payments for different events; pay once for the total.</p>
-    </div>
-    
-    <div class="help-step">
-      <strong>3. Transaction ID</strong>
-      <p>Find the 12-digit UPI Transaction ID (Ref No.) in your payment history and paste it in the box.</p>
-    </div>
-    
-    <div class="help-step">
-      <strong>4. Verification (Important)</strong>
-      <p>Our team will verify your payment within <strong>24 to 48 hours</strong>. You will receive an "Approved" email once confirmed.</p>
-    </div>
-    
+    <div class="help-step"><strong>1. Selection</strong><p>Choose your events and enter details correctly.</p></div>
+    <div class="help-step"><strong>2. Payment</strong><p>Pay the total amount shown via QR.</p></div>
+    <div class="help-step"><strong>3. Transaction ID</strong><p>Paste the 12-digit Ref No. from your bank/UPI app.</p></div>
+    <div class="help-step"><strong>4. Verification</strong><p>Approval takes <strong>24 to 48 hours</strong>.</p></div>
     <button onclick="closeHelp()" style="margin-top:20px; width:100%;">Got it, Vro!</button>
   </div>
 </div>
@@ -254,19 +224,17 @@ let selectedEvents = {};
 
 function toggleDate(date, el) {
   if (selectedDates.includes(date)) {
-    // Remove the date
     selectedDates = selectedDates.filter(d => d !== date);
     delete selectedEvents[date];
     el.classList.remove("selected");
   } else {
-    // Add the date
     selectedDates.push(date);
     el.classList.add("selected");
   }
 }
 
 async function goToEvents(){
-  if(selectedDates.length === 0){ alert("Selection Required: Please select at least one date."); return; }
+  if(selectedDates.length === 0){ alert("Please select a date."); return; }
   const btn = document.querySelector("button[onclick='goToEvents()']");
   btn.innerText = "Syncing Slots..."; btn.disabled = true;
   try {
@@ -307,7 +275,7 @@ function selectEvent(date, ev, el){
 }
 
 function goToDetails(){
-  if(Object.keys(selectedEvents).length < selectedDates.length){ alert("Please select an event for each day."); return; }
+  if(Object.keys(selectedEvents).length < selectedDates.length){ alert("Please select an event."); return; }
   buildParticipantForms();
   buildPaymentSummary();
   nextStep(3);
@@ -326,7 +294,14 @@ function participantFields(ev, date){
   let html = ""; let count = (ev.type === "individual") ? 1 : 4;
   for(let i=1; i<=count; i++){
     let isReq = (ev.type === "individual" || ev.type === "biz" || i <= 2) ? "required" : "";
-    html += `<div class="participant-section"><span class="participant-title">Participant ${i} ${isReq ? '' : '(Optional)'}</span><div class="input-grid"><div class="input-wrapper"><i class="fas fa-user"></i><input id="${date}-p${i}-name" placeholder="Name" ${isReq}></div><div class="input-wrapper"><i class="fas fa-phone"><input type="tel" id="${date}-p${i}-phone"placeholder="10-digit Phone"maxlength="10" ${isReq} oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div></div></div>`;
+    html += `
+      <div class="participant-section">
+        <span class="participant-title">Participant ${i} ${isReq ? '' : '(Optional)'}</span>
+        <div class="input-grid">
+          <div class="input-wrapper"><i class="fas fa-user"></i><input id="${date}-p${i}-name" placeholder="Name" ${isReq}></div>
+          <div class="input-wrapper"><i class="fas fa-phone"></i><input type="tel" id="${date}-p${i}-phone" placeholder="10-digit Phone" maxlength="10" ${isReq} oninput="this.value = this.value.replace(/[^0-9]/g, '');"></div>
+        </div>
+      </div>`;
   }
   return html;
 }
@@ -334,32 +309,27 @@ function participantFields(ev, date){
 function validateStep3() {
   const college = document.getElementById('common-college').value.trim();
   const dept = document.getElementById('common-dept').value.trim();
-  
-  if (!college || !dept) { alert("⚠️ Please enter your College and Department details."); return;}
+  if (!college || !dept) { alert("⚠️ Please enter College and Department."); return; }
   const phoneRegex = /^[0-9]{10}$/;
-for (let date in selectedEvents) { let ev = selectedEvents[date];
+  for (let date in selectedEvents) {
+    let ev = selectedEvents[date];
     let email = document.getElementById(`${date}-email`).value.trim();
-    
-    // Basic Email Check
- if (!email || !email.includes('@')) { alert(`⚠️ Valid email required for ${ev.name}.`); return;  }
-
+    if (!email || !email.includes('@')) { alert(`⚠️ Valid email required for ${ev.name}.`); return; }
     let count = (ev.type === "individual") ? 1 : 4;
     for (let i = 1; i <= count; i++) {
-      let nameField = document.getElementById(`${date}-p${i}-name`);
-      let phoneField = document.getElementById(`${date}-p${i}-phone`);
-      
-      if (!nameField) continue; // Safety check
-
-      let name = nameField.value.trim();
-      let phone = phoneField.value.trim();
-
-      // Check if this participant is mandatory
-      let isMandatory = (ev.type === "individual" || ev.type === "biz" || i <= 2);
-
-      if (isMandatory) { if (!name) { alert(`⚠️ Participant ${i} Name is required for ${ev.name}.`); return; }
-        if (!phoneRegex.test(phone)) { alert(`⚠️ Participant ${i} needs a valid 10-digit Phone Number for ${ev.name}. (No alphabets allowed)`);phoneField.focus();return; } } else {
-        // For optional participants: if one field is filled, the other must be valid too
-        if (name || phone) { if (!name || !phoneRegex.test(phone)) { alert(`⚠️ Please complete optional Participant ${i} details with a valid 10-digit number or leave both blank.`);phoneField.focus(); return;}}}}}nextStep(4);}
+      let n = document.getElementById(`${date}-p${i}-name`).value.trim();
+      let p = document.getElementById(`${date}-p${i}-phone`).value.trim();
+      let mandatory = (ev.type === "individual" || ev.type === "biz" || i <= 2);
+      if (mandatory) {
+        if (!n) { alert(`⚠️ Participant ${i} Name is required for ${ev.name}.`); return; }
+        if (!phoneRegex.test(p)) { alert(`⚠️ Participant ${i} needs a valid 10-digit Phone for ${ev.name}.`); return; }
+      } else if (n || p) {
+        if (!n || !phoneRegex.test(p)) { alert(`⚠️ Complete optional Participant ${i} correctly.`); return; }
+      }
+    }
+  }
+  nextStep(4);
+}
 
 function buildPaymentSummary(){
   let total=0; let html=`<div style="font-family:'Montserrat'; font-size:0.9rem;">`;
@@ -405,12 +375,9 @@ function prevStep(step){ nextStep(step); }
 function updateProgress(step){ document.querySelectorAll(".progress div").forEach(p=>p.classList.remove("active")); document.getElementById("p"+step).classList.add("active"); }
 async function fetchCapacity() { const res = await fetch(SCRIPT_URL + "?action=capacity"); return await res.json(); }
 const toBase64 = file => new Promise((resolve, reject) => { const r = new FileReader(); r.readAsDataURL(file); r.onload = () => resolve(r.result); r.onerror = e => reject(e); });
-
 function openHelp(){ document.getElementById("helpModal").style.display = "block"; }
 function closeHelp(){ document.getElementById("helpModal").style.display = "none"; }
 window.onclick = function(event){ if(event.target == document.getElementById("helpModal")){ closeHelp(); } }
 </script>
 </body>
 </html>
-
-
