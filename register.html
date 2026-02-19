@@ -189,12 +189,13 @@ button:hover { background: var(--gold-grad); color: var(--maroon); }
 <div id="helpModal" class="modal">
   <div class="modal-content">
     <span class="close-modal" onclick="closeHelp()">×</span>
-    <h2 style="margin-bottom:20px;">Registration Guide</h2>
-    <div class="help-step"><strong>1. Selection</strong><p>Choose your events and enter details correctly.</p></div>
-    <div class="help-step"><strong>2. Payment</strong><p>Pay the total amount shown via QR.</p></div>
-    <div class="help-step"><strong>3. Transaction ID</strong><p>Paste the 12-digit Ref No. from your bank/UPI app.</p></div>
-    <div class="help-step"><strong>4. Verification</strong><p>Approval takes <strong>24 to 48 hours</strong>.</p></div>
-    <button onclick="closeHelp()" style="margin-top:20px; width:100%;">Got it, Vro!</button>
+    <h2 style="font-family:'Cinzel'; color:var(--gold); margin-bottom:20px; border-bottom:1px solid var(--gold); padding-bottom:10px;">REGISTRATION GUIDE</h2>
+    <div class="help-step"><strong>STEP 1: EVENT SELECTION</strong><p>Select your dates (March 10, 11, or Both). Choose your competition. If an event says "SOLD OUT," capacity has been reached.</p></div>
+    <div class="help-step"><strong>STEP 2: ENTERING DETAILS</strong><p>Enter College Name & Dept. correctly. For Team events, Participant 1 is the lead. Ensure phone numbers are exactly 10 digits (no alphabets).</p></div>
+    <div class="help-step"><strong>STEP 3: PAYMENT (CRUCIAL)</strong><p>Scan the QR code and pay the <strong>Total Amount</strong> shown in the fee box. Do not pay separately for multiple events; make one single transaction.</p></div>
+    <div class="help-step"><strong>STEP 4: VERIFICATION</strong> <p>Copy the 12-digit <strong>UPI Transaction ID</strong> (Ref No.) from GPay/PhonePe and paste it. Upload a clear screenshot of the success screen.</p></div>
+    <div class="help-step"><strong>STEP 5: CONFIRMATION</strong><p>Our team will verify your payment. Verification usually takes <strong>24 to 48 hours</strong>. You will receive an "APPROVED" email with the official WhatsApp group link once confirmed.</p></div>
+    <button onclick="closeHelp()" style="margin-top:20px; width:100%; background:var(--gold-grad); color:var(--maroon); border:none; padding:12px; font-weight:bold; font-family:'Cinzel'; border-radius:5px; cursor:pointer;">I UNDERSTAND, VRO!</button>
   </div>
 </div>
 
@@ -367,7 +368,11 @@ async function submitFinalRegistration(){
 }
 
 function showSuccess(ids){
-  document.querySelector(".container").innerHTML = `<div style="text-align:center; padding:40px;"><i class="fas fa-check-circle" style="font-size:4rem; color:var(--gold); margin-bottom:20px;"></i><h2 style="color:var(--gold); font-family:'Cinzel';">Registration Successful</h2><p style="margin:20px 0;">Verification will take <strong>24 to 48 hours</strong>.</p><p>IDs: ${ids.join(', ')}</p></div>`;
+  document.querySelector(".container").innerHTML = `<div style="text-align:center; padding:40px;"><i class="fas fa-check-circle" style="font-size:4rem; color:var(--gold); margin-bottom:20px;"></i><h2 style="color:var(--gold); font-family:'Cinzel';">Registration Successful</h2>
+      <p style="margin:20px 0;">Your application has been received!</p>
+      <div style="background:rgba(212,175,55,0.1); padding:15px; border-radius:10px; margin-bottom:20px;"><p><strong>Registration ID(s):</strong><br>${ids.join(', ')}</p></div>
+      <p style="font-size:0.85rem; color:var(--gold);">Verification will take <strong>24 to 48 hours</strong>. Please check your email for the approval status and WhatsApp group link.</p>
+    </div>`;
 }
 
 function nextStep(step){ document.querySelectorAll(".step").forEach(s=>s.classList.remove("active")); document.getElementById("step"+step).classList.add("active"); updateProgress(step); window.scrollTo({top: 0, behavior: 'smooth'}); }
@@ -381,3 +386,4 @@ window.onclick = function(event){ if(event.target == document.getElementById("he
 </script>
 </body>
 </html>
+
