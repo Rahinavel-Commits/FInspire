@@ -51,9 +51,8 @@
     .status-badge { padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
     .APPROVED { background: #1b5e20; } .PENDING { background: #f57f17; } .REJECTED { background: #b71c1c; }
 
-    .view-btn { color: var(--gold); text-decoration: none; font-size: 0.8rem; border: 1px solid var(--gold); padding: 3px 8px; border-radius: 4px; }
-    .btn-approve { background: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px; }
-    .btn-reject { background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
+    .btn-approve { background: #28a745; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px; font-weight: bold; }
+    .btn-reject { background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -80,10 +79,9 @@
       
       <section id="dashboard" class="tab-content active">
         <div class="stats-grid">
-          <div class="stat-card"><h3>Approved Revenue</h3><p id="stat-rev">₹0</p></div>
           <div class="stat-card"><h3>Total Entries</h3><p id="stat-total">0</p></div>
-          <div class="stat-card"><h3>Pending</h3><p id="stat-pending">0</p></div>
-          <div class="stat-card"><h3>Approved</h3><p id="stat-approved">0</p></div>
+          <div class="stat-card"><h3>Pending Apps</h3><p id="stat-pending">0</p></div>
+          <div class="stat-card"><h3>Approved Apps</h3><p id="stat-approved">0</p></div>
         </div>
         <h2 style="font-family:'Cinzel'; color:var(--gold); font-size:1.2rem; border-bottom:1px solid var(--gold); padding-bottom:10px; margin-bottom:20px;">Event Occupancy</h2>
         <div class="capacity-section" id="capacity-trackers"></div>
@@ -93,7 +91,7 @@
         <div class="table-wrapper">
           <table>
             <thead>
-              <tr><th>Reg ID</th><th>Lead Name</th><th>Event</th><th>Amount</th><th>Proof</th><th>Action</th></tr>
+              <tr><th>Reg ID</th><th>Lead Name</th><th>Event</th><th>Institution</th><th>Action</th></tr>
             </thead>
             <tbody id="pending-body"></tbody>
           </table>
@@ -102,13 +100,13 @@
 
       <section id="all" class="tab-content">
         <div style="margin-bottom:20px; display:flex; justify-content:space-between;">
-          <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search by name or ID..." style="background:#000; border:1px solid var(--gold); color:#fff; padding:10px; width:300px;">
+          <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search Lead or ID..." style="background:#000; border:1px solid var(--gold); color:#fff; padding:10px; width:300px;">
           <button onclick="downloadCSV()" style="background:#28a745; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:bold;">DOWNLOAD MASTER EXCEL</button>
         </div>
         <div class="table-wrapper">
           <table id="allTable">
             <thead>
-              <tr><th>Reg ID</th><th>Name</th><th>Event</th><th>Status</th><th>Screenshot</th></tr>
+              <tr><th>Reg ID</th><th>Lead Name</th><th>Event</th><th>Institution</th><th>Status</th></tr>
             </thead>
             <tbody id="all-body"></tbody>
           </table>
@@ -119,8 +117,7 @@
   </div>
 
   <script>
-    // --- SETTINGS ---
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZbm-1xiZUEgY-V3p_I_WfGG5QcYqeSnkA0Sq2MlxckX0WTCbGzRvqm3Rt4KYHeP3f/exec"; 
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgfZZqIiKrxKaoEE2J9NHiw6kb_SKP1YRsMdX7yBtPai9GZoy8xSibsrq7vi8j2_Q/exec"; 
     const SECRET_KEY = "ECHELON_SUPER_SECRET_2026"; 
     let fullData = [];
     let eventConfig = {};
@@ -150,12 +147,14 @@
       const trackerContainer = document.getElementById('capacity-trackers');
       
       pBody.innerHTML = ""; aBody.innerHTML = ""; trackerContainer.innerHTML = "";
-      let rev = 0, total = 0, pending = 0, approved = 0, counts = {};
+      let total = 0, pending = 0, approved = 0, counts = {};
 
       for (let i = 1; i < fullData.length; i++) {
         const row = fullData[i];
         const status = String(row[13] || "").trim().toUpperCase();
+        const dateKey = row[2];
         const eventName = row[3];
+        const institution = row[5];
         total++;
 
         let displayName = "N/A";
@@ -166,23 +165,21 @@
         } catch(e) { displayName = row[8] || "N/A"; }
 
         if(status === "APPROVED") { 
-          rev += parseInt(row[12] || 0); 
           approved++; 
           counts[eventName] = (counts[eventName] || 0) + 1;
         }
         if(status === "PENDING" || status === "") pending++;
 
-        let rowHtml = `<td>${row[4] || '---'}</td><td>${displayName}</td><td>${eventName}</td>`;
+        let rowHtml = `<td>${row[4] || '---'}</td><td>${displayName}</td><td>${eventName}</td><td>${institution}</td>`;
         
         if (status === "PENDING" || status === "") {
-          pBody.innerHTML += `<tr>${rowHtml}<td>₹${row[12]}</td><td><a href="${row[11]}" target="_blank" class="view-btn">VIEW</a></td>
-            <td><button onclick="updateStatus(${i+1}, 'APPROVED')" class="btn-approve">APP</button>
-            <button onclick="updateStatus(${i+1}, 'REJECTED')" class="btn-reject">REJ</button></td></tr>`;
+          pBody.innerHTML += `<tr>${rowHtml}
+            <td><button onclick="updateStatus(${i+1}, 'APPROVED')" class="btn-approve">APPROVE</button>
+            <button onclick="updateStatus(${i+1}, 'REJECTED')" class="btn-reject">REJECT</button></td></tr>`;
         }
-        aBody.innerHTML += `<tr>${rowHtml}<td><span class="status-badge ${status}">${status || 'PENDING'}</span></td><td><a href="${row[11]}" target="_blank" class="view-btn">VIEW</a></td></tr>`;
+        aBody.innerHTML += `<tr>${rowHtml}<td><span class="status-badge ${status}">${status || 'PENDING'}</span></td></tr>`;
       }
 
-      document.getElementById('stat-rev').innerText = "₹" + rev;
       document.getElementById('stat-total').innerText = total;
       document.getElementById('stat-pending').innerText = pending;
       document.getElementById('stat-approved').innerText = approved;
@@ -198,7 +195,7 @@
     }
 
     async function updateStatus(rowId, status) {
-      if(!confirm(`Confirm ${status}?`)) return;
+      if(!confirm(`Confirm ${status} for this application?`)) return;
       await fetch(`${SCRIPT_URL}?action=updateStatus&rowId=${rowId}&newStatus=${status}&key=${SECRET_KEY}`, { method: 'POST' });
       loadData();
     }
@@ -219,22 +216,16 @@
     }
 
     function downloadCSV() {
-      let csv = "Date,Event,Reg ID,College,P1 Name,P1 Phone,P2 Name,P2 Phone,P3 Name,P3 Phone,P4 Name,P4 Phone,Amount,Status\n";
+      let csv = "Date,Event,Reg ID,College,Lead Name,Phone,Status\n";
       for(let i=1; i<fullData.length; i++){
         const r = fullData[i];
-        if(r[13] === "APPROVED") {
-          let p = []; try { p = JSON.parse(r[8]); } catch(e) { p = [{name: r[8], phone: r[9]}]; }
-          let pCols = ""; for(let j=0; j<4; j++) { pCols += p[j] ? `"${p[j].name}","${p[j].phone}",` : `"","" ,`; }
-          csv += `"${r[0]}","${r[3]}","${r[4]}","${r[5]}",` + pCols + `"${r[12]}","${r[13]}"\n`;
-        }
+        let p = []; try { p = JSON.parse(r[8]); } catch(e) { p = [{name: r[8]}]; }
+        csv += `"${r[2]}","${r[3]}","${r[4]}","${r[5]}","${p[0].name}","${r[9]}","${r[13]}"\n`;
       }
       const blob = new Blob([csv], { type: 'text/csv' });
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'ECHELON_MASTER.csv'; a.click();
+      const a = document.createElement('a'); a.href = url; a.download = 'ECHELON_RECORDS.csv'; a.click();
     }
   </script>
 </body>
 </html>
-
-
-
