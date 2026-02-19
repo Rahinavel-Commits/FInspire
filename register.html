@@ -287,7 +287,6 @@ function participantFields(ev, date){
 
 async function submitFinalRegistration(){
   if(!document.getElementById("declaration").checked){ alert("Please confirm details."); return; }
-  
   const college = document.getElementById('common-college').value.trim();
   if(!college){ alert("College name required."); return; }
 
@@ -298,22 +297,35 @@ async function submitFinalRegistration(){
     selectedEvents: Object.keys(selectedEvents).map(date => {
       const ev = selectedEvents[date];
       const parts = [];
-      for(let i=1; i<=4; i++){
-        let n = document.getElementById(`${date}-p${i}-name`).value.trim();
-        let p = document.getElementById(`${date}-p${i}-phone`).value.trim();
-        if(n) parts.push({name:n, phone:p});
+      // IDENTITY UNLEASHED ONLY HAS 1 PARTICIPANT, OTHERS HAVE 4
+      const maxParticipants = (ev.type === "individual") ? 1 : 4;
+
+      for(let i=1; i <= maxParticipants; i++){
+        let nameEl = document.getElementById(`${date}-p${i}-name`);
+        let phoneEl = document.getElementById(`${date}-p${i}-phone`);
+        
+        // CRITICAL FIX: Only try to read value if the element actually exists in the HTML
+        if(nameEl && phoneEl) {
+          let n = nameEl.value.trim();
+          let p = phoneEl.value.trim();
+          if(n) parts.push({name:n, phone:p});
+        }
       }
+      
       return { 
-        date, eventName: ev.name, email: document.getElementById(`${date}-email`).value, 
-        college: college, department: document.getElementById('common-dept').value, 
-        participants: parts, fee: 0, status: 'PENDING' 
+        date, 
+        eventName: ev.name, 
+        email: document.getElementById(`${date}-email`).value, 
+        college: college, 
+        department: document.getElementById('common-dept').value, 
+        participants: parts, 
+        fee: 0, 
+        status: 'PENDING' 
       };
     })
   };
 
   try {
-    // We use mode: no-cors to bypass GitHub/Google security blocks.
-    // This allows data to send, but we can't read the response.
     await fetch(SCRIPT_URL, {
       method: "POST",
       body: JSON.stringify(payload),
@@ -324,7 +336,6 @@ async function submitFinalRegistration(){
     const ids = payload.selectedEvents.map(e => "EC26-" + Math.floor(1000 + Math.random() * 9000));
     showSuccess(ids);
   } catch(e) {
-    // Even if fetch throws an error because of CORS, data usually reaches the sheet.
     const ids = payload.selectedEvents.map(e => "EC26-" + Math.floor(1000 + Math.random() * 9000));
     showSuccess(ids);
   }
@@ -343,4 +354,5 @@ function closeHelp(){ document.getElementById("helpModal").style.display = "none
 </script>
 </body>
 </html>
+
 
