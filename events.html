@@ -123,6 +123,44 @@
 
 /* Ensure the card position is relative for the badge */
 .event-card { position: relative; }
+
+      /* Floating Register Button */
+.floating-reg-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--gold-grad);
+    color: var(--maroon);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 999;
+    transition: var(--transition);
+    border: none;
+    animation: pulse 2s infinite;
+}
+
+.floating-reg-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+/* Hide on very small screens if it overlaps footer content, or keep it—your call! */
+@media (max-width: 600px) {
+    .floating-reg-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.2rem; }
+}
     </style>
 </head>
 <body>
@@ -403,6 +441,16 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.event-card, .rules-container').forEach(el => observer.observe(el));
         window.onclick = (e) => { if(e.target.id == 'eventModal') closeModal(); };
+      function scrollToRegister() {
+    const regSection = document.querySelector('.master-reg-container');
+    if (regSection) {
+        regSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
     </script>
+  <button class="floating-reg-btn" onclick="scrollToRegister()" title="Register Now">
+    <i class="fas fa-user-plus"></i>
+</button>
 </body>
 </html>
+
