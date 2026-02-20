@@ -49,7 +49,7 @@
         .echelon-title { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 7vw, 3.5rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; line-height: 1.2; }
 
         /* RULES SECTION */
-        .rules-wrapper { padding: 40px 5%; background: var(--bg-dark); }
+        .rules-wrapper { padding: 25px; gap: 20px; background: var(--bg-dark); }
         .rules-container { display: flex; flex-wrap: wrap; gap: 20px; background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.3); padding: clamp(20px, 5vw, 40px); border-radius: 15px; }
         .rules-image-box { flex: 1 1 300px; border: 2px solid var(--gold); border-radius: 8px; height: 300px; overflow: hidden; }
         .rules-image-box img { width: 100%; height: 100%; object-fit: cover; }
@@ -57,9 +57,9 @@
         .rules-content h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: clamp(1.2rem, 4vw, 2rem); margin-bottom: 10px; }
         .gold-divider { height: 1px; width: 60px; background: var(--gold-grad); margin-bottom: 20px; }
         .rules-list { list-style: none; }
-        .rules-list li { margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; display: flex; gap: 10px; }
+        .rules-list li { margin-bottom: 8px; font-size: 0.85rem; line-height: 1.5; display: flex; gap: 10px; }
         .rules-list li i { color: var(--gold); margin-top: 3px; font-size: 0.7rem; }
-        #hidden-rules { max-height: 0; overflow: hidden; transition: max-height 0.6s ease; }
+        #hidden-rules { margin-top: 0; max-height: 0; overflow: hidden; transition: max-height 0.6s ease; }
         .toggle-rules-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; padding: 8px 20px; margin-top: 10px; cursor: pointer; border-radius: 4px; font-size: 0.8rem; }
 
         /* CARDS GRID */
@@ -110,8 +110,8 @@
         .modal-list li { margin-bottom: 8px; font-size: 0.85rem; line-height: 1.6; display: flex; gap: 8px; color: var(--cream); }
         .modal-list li::before { content: "•"; color: var(--gold); font-weight: bold; }
 
-        .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 15px 0; }
-        .snapshot-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; }
+        .snapshot-grid {display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 15px;margin: 15px 0;width: 100%;}
+        .snapshot-box {display: flex;align-items: center;justify-content: flex-start; /* Aligns content to the left */text-align: left;background: rgba(255, 255, 255, 0.05);border: 1px solid rgba(212, 175, 55, 0.2);border-radius: 10px;padding: 12px;height: 100%; /* Ensures all boxes are same height */}
         .snapshot-box i { font-size: 1.1rem; color: #4da3ff; }
         .snapshot-info strong { font-size: 0.6rem; color: #999; display: block; }
         .snapshot-info span { font-size: 0.8rem; color: var(--cream); }
@@ -434,4 +434,5 @@
     </script>
 </body>
 </html>
+
 
