@@ -29,33 +29,35 @@
             z-index: 1001; border-bottom: 2px solid var(--gold);
         }
         #navbar ul { display: flex; justify-content: center; list-style: none; gap: 40px; }
-        .nav-btn-link {color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif;font-size: 0.9rem; letter-spacing: 2px; font-weight: 700;}
+        .nav-btn-link {color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 2px; font-weight: 700;}
         .nav-btn-link:hover { text-shadow: 0 0 10px var(--gold); transform: translateY(-2px); }
 
-       /* HERO - Space Removed */
-        .hero { display: flex; align-items: center; justify-content: center; padding: 20px 10px; background: radial-gradient(circle at center, #630048 0%, #4B0036 100%); }
+        /* HERO */
+        .hero { display: flex; align-items: center; justify-content: center; padding: 120px 10px 40px; background: radial-gradient(circle at center, #630048 0%, #4B0036 100%); }
         .header-container { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 4vw, 30px); width: 100%; }
         .logo { width: clamp(50px, 10vw, 80px); height: auto; border-radius: 50%; }
         .echelon-title { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 6vw, 3.5rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
 
         /* RULES SECTION */
-           .rules-wrapper { padding: 30px 5%; background: var(--bg-dark); }
+        .rules-wrapper { padding: 30px 5%; background: var(--bg-dark); }
         .rules-container { display: flex; flex-wrap: wrap; gap: 20px; background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 15px; }
         .rules-image-box { flex: 1 1 300px; border: 2px solid var(--gold); border-radius: 8px; height: 300px; overflow: hidden; }
         .rules-image-box img { width: 100%; height: 100%; object-fit: cover; }
         .rules-content { flex: 1.5 1 300px; }
         .rules-content h2 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 5px; }
         .rules-list { list-style: none; }
-        .rules-list li { margin-bottom: 8px; font-size: 0.85rem; display: flex; gap: 10px; line-height: 1.4; }
+        .rules-list li { margin-bottom: 8px; font-size: 0.85rem; display: flex; gap: 10px; line-height: 1.4; align-items: flex-start; }
+        .rules-list li i { color: var(--gold); font-size: 0.8rem; padding-top: 3px; }
+
         #hidden-rules { max-height: 0; overflow: hidden; transition: max-height 0.6s ease; }
-        .toggle-rules-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; padding: 8px 18px; margin-top: 10px; cursor: pointer; border-radius: 4px; }
+        .toggle-rules-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; padding: 8px 18px; margin-top: 10px; cursor: pointer; border-radius: 4px; transition: 0.3s; }
+        .toggle-rules-btn:hover { background: var(--gold-grad); color: var(--maroon); border-color: transparent; }
 
         /* CARDS GRID */
-        .event-day { padding: 40px 5%; background: var(--bg-dark); }
+        .event-day { padding: 40px 5% 10px; background: var(--bg-dark); }
         .day-heading { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
         .day-heading::before, .day-heading::after { content: ""; height: 1px; flex-grow: 1; background: var(--gold-grad); opacity: 0.3; }
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
-
 
         /* EVENT CARD */
         .event-card { background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; overflow: hidden; position: relative; transition: var(--transition); }
@@ -65,23 +67,39 @@
         .event-card:hover .card-image-wrapper img { transform: scale(1.1); }
         .card-content { padding: 20px; text-align: center; }
         .card-content h3 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 12px; font-size: 1.2rem; }
-        .know-more-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; font-weight: 700; cursor: pointer; border-radius: 4px; }
-        .prize-badge { background: var(--gold-grad); color: var(--maroon); font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.65rem; padding: 6px 12px; position: absolute; top: 15px; right: 0; border-radius: 15px 0 0 15px; z-index: 5; 
+        .know-more-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; font-weight: 700; cursor: pointer; border-radius: 4px; transition: 0.3s; }
+        .know-more-btn:hover { background: var(--gold-grad); color: var(--maroon); border-color: transparent; }
+        
+        /* Fixed prize-badge with Disclaimer */
+        .prize-badge { 
+            background: var(--gold-grad); color: var(--maroon); font-family: 'Cinzel', serif; 
+            font-weight: 700; padding: 6px 15px; position: absolute; 
+            top: 15px; right: 0; border-radius: 15px 0 0 15px; z-index: 5; 
+            display: flex; flex-direction: column; align-items: flex-end;
+            box-shadow: -2px 4px 10px rgba(0,0,0,0.3);
+        }
+        .prize-main { font-size: 0.75rem; white-space: nowrap; }
+        .prize-sub { font-size: 0.5rem; font-family: 'Montserrat'; font-weight: 600; opacity: 0.8; margin-top: -2px; }
+
+        .disclaimer-text { 
+            text-align: center; font-size: 0.7rem; color: rgba(245, 241, 230, 0.5); 
+            padding: 20px 5%; font-style: italic; background: var(--bg-dark);
+        }
 
         /* MASTER REGISTER BUTTON */
-        .master-reg-container { text-align: center; padding: 60px 20px; background: var(--bg-dark); }
+        .master-reg-container { text-align: center; padding: 40px 20px 80px; background: var(--bg-dark); }
         .master-reg-btn { padding: 20px 60px; font-size: 1.5rem; background: var(--gold-grad); color: var(--maroon); border: none; font-family: 'Cinzel'; font-weight: 700; border-radius: 50px; cursor: pointer; transition: 0.4s; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); text-decoration: none; display: inline-block; }
         .master-reg-btn:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5); }
 
-       /* FLOATING BUTTON */
+        /* FLOATING BUTTON */
         .floating-reg-btn {
             position: fixed; bottom: 25px; right: 25px; background: var(--gold-grad); 
             color: var(--maroon); width: 55px; height: 55px; border-radius: 50%; 
             display: flex; align-items: center; justify-content: center; font-size: 1.3rem; 
             box-shadow: 0 8px 20px rgba(0,0,0,0.5); cursor: pointer; z-index: 999; 
-            border: none; animation: pulse 2s infinite; transition: opacity 0.3s;
+            border: none; animation: pulse 2s infinite; transition: opacity 0.4s ease, transform 0.4s ease;
         }
-        .floating-reg-btn.hidden { opacity: 0; pointer-events: none; }
+        .floating-reg-btn.hidden { opacity: 0; pointer-events: none; transform: translateY(20px); }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
@@ -89,7 +107,7 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
- /* MODALS */
+        /* MODALS & OTHERS */
         .modal-overlay { position: fixed; inset: 0; background: rgba(20, 0, 15, 0.98); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(10px); padding: 20px; }
         .modal-content { background: #3a002a; border: 1px solid var(--gold); width: 100%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 12px; padding: 40px; position: relative; }
         .close-modal { position: absolute; top: 15px; right: 20px; color: var(--gold); font-size: 2.5rem; cursor: pointer; line-height: 1; }
@@ -97,110 +115,24 @@
         .modal-list li { margin-bottom: 10px; font-size: 0.95rem; line-height: 1.6; list-style: none; display: flex; gap: 10px; }
         .modal-list li::before { content: "•"; color: var(--gold); font-weight: bold; }
 
-        /* SNAPSHOT GRID */
         .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 20px 0; }
         .snapshot-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 10px; padding: 15px; display: flex; align-items: center; gap: 12px; }
         .snapshot-box i { font-size: 1.3rem; color: #D4AF37; }
         .snapshot-info strong { font-size: 0.7rem; color: #aaa; display: block; text-transform: uppercase; }
         .snapshot-info span { font-size: 0.9rem; color: var(--cream); font-weight: 500; }
 
-              /* --- Footer Styling --- */
-footer { 
-    padding: 80px 5% 40px; 
-    background: #1a0014; 
-    border-top: 1px solid rgba(212, 175, 55, 0.3); 
-}
-
-.footer-main-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 40px; 
-}
-
-.footer-column h4 {
-    font-family: 'Cinzel', serif;
-    color: var(--gold);
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-}
-
-.footer-column p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: var(--cream);
-}
-
-/* --- Actionable Links & Buttons --- */
-.action-link { 
-    color: var(--gold); 
-    text-decoration: none; 
-    transition: var(--transition); 
-    font-weight: 500;
-    display: inline-block;
-}
-
-.action-link:hover {
-    transform: translateX(5px);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-}
-
-.maps-btn { 
-    display: inline-block; 
-    margin-top: 15px; 
-    padding: 12px 25px; 
-    border: 1px solid var(--gold); 
-    color: var(--gold); 
-    text-decoration: none; 
-    font-family: 'Cinzel'; 
-    font-size: 0.75rem; 
-    border-radius: 4px; 
-    transition: var(--transition); 
-}
-
-.maps-btn:hover { 
-    background: var(--gold-grad); 
-    color: var(--maroon); 
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); 
-    transform: translateY(-2px);
-    border-color: transparent;
-}
-
-/* --- Social Icons --- */
-.footer-column.right-assigned { 
-    text-align: right; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: flex-end; 
-}
-
-.social-icons { 
-    display: flex; 
-    gap: 15px; 
-    margin-top: 25px; 
-}
-
-.social-icon { 
-    width: 45px; 
-    height: 45px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border: 1px solid rgba(212, 175, 55, 0.4); 
-    border-radius: 50%; 
-    color: var(--gold); 
-    text-decoration: none; 
-    transition: var(--transition); 
-}
-
-.social-icon:hover {
-    transform: translateY(-5px) scale(1.1);
-    background: rgba(212, 175, 55, 0.1);
-    border-color: var(--gold);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-}
-
-.social-icon i { transition: var(--transition); }
-.social-icon:hover i { transform: scale(1.2); }
+        footer { padding: 80px 5% 40px; background: #1a0014; border-top: 1px solid rgba(212, 175, 55, 0.3); }
+        .footer-main-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .footer-column h4 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 20px; letter-spacing: 2px; }
+        .footer-column p { font-size: 0.9rem; line-height: 1.6; color: var(--cream); }
+        .action-link { color: var(--gold); text-decoration: none; transition: var(--transition); font-weight: 500; display: inline-block; }
+        .action-link:hover { transform: translateX(5px); text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+        .maps-btn { display: inline-block; margin-top: 15px; padding: 12px 25px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; border-radius: 4px; transition: var(--transition); }
+        .maps-btn:hover { background: var(--gold-grad); color: var(--maroon); border-color: transparent; }
+        .footer-column.right-assigned { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+        .social-icons { display: flex; gap: 15px; margin-top: 25px; }
+        .social-icon { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 50%; color: var(--gold); text-decoration: none; transition: var(--transition); }
+        .social-icon:hover { transform: translateY(-5px); background: rgba(212, 175, 55, 0.1); border-color: var(--gold); }
     </style>
 </head>
 <body>
@@ -215,9 +147,9 @@ footer {
 
     <section class="hero">
         <div class="header-container">
-            <img src="https://lh3.googleusercontent.com/d/1JAn4QUP7_QA1jymyHLBpQQ4gicuXgliV" class="logo" alt="RKMVC">
+            <img src="https://lh3.googleusercontent.com/d/1JAn4QUP7_QA1jymyHLBpQQ4gicuXgliV" class="logo" alt="RMKVC">
             <h1 class="echelon-title">ECHELON '26</h1>
-            <img src="https://lh3.googleusercontent.com/d/167gpyrjV3XO-mx31F_nsqXX7c6lE6QoY" class="logo" alt="FINSpire">
+            <img src="https://lh3.googleusercontent.com/d/167gpyrjV3XO-mx31F_nsqXX7c6lE6QoY" class="logo" alt="Finspire">
         </div>
     </section>
 
@@ -225,21 +157,21 @@ footer {
         <div class="rules-container">
             <div class="rules-image-box"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800"></div>
             <div class="rules-content">
-                <h2>GENERAL RULES & REGULATIONS</h2>
+                <h2>GENERAL RULES & REGULATIONS – ECHELON</h2>
                 <div class="gold-divider"></div>
                 <ul class="rules-list">
-                    <li><i class="fas fa-crown"></i> All participants must be registered prior to the event. Entry without valid registration will not be permitted. Only online registrations are allowed. On spot registration is not permitted.</li>
-                    <li><i class="fas fa-crown"></i> Participants must always carry a valid College ID card and produce it for verification when required</li>
-                    <li><i class="fas fa-crown"></i> Participants are required to report to the venue at least 30 minutes prior to the scheduled time of their event.</li>
-                    <li><i class="fas fa-crown"></i> Use of mobile phones, smart watches, internet access, or any unfair means during the event is strictly prohibited unless specifically permitted.</li>
+                    <li><i class="fas fa-crown"></i> 1. All participants must be registered prior to the event. Entry without valid registration will not be permitted. Only online registrations are allowed. On spot registration is not permitted.</li>
+                    <li><i class="fas fa-crown"></i> 2. Participants must always carry a valid College ID card and produce it for verification when required.</li>
+                    <li><i class="fas fa-crown"></i> 3. Participants are required to report to the venue at least 30 minutes prior to the scheduled time of their event.</li>
+                    <li><i class="fas fa-crown"></i> 4. Use of mobile phones, smart watches, internet access, or any unfair means during the event is strictly prohibited unless specifically permitted.</li>
                 </ul>
                 <div id="hidden-rules">
                     <ul class="rules-list" style="margin-top: 10px;">
-                        <li><i class="fas fa-crown"></i> Participants must maintain discipline, decorum, and professional behaviour throughout the event. </li>
-                        <li><i class="fas fa-crown"></i> Any form of malpractice, plagiarism, misrepresentation, or misconduct will result in immediate disqualification.</li>
-                        <li><i class="fas fa-crown"></i> Participants must bring their own devices and any other required materials for PPT presentations. The organizers will not be responsible for providing technical accessories.</li>
-                        <li><i class="fas fa-crown"></i> .Decisions taken by the judges and organizing committee shall be final and binding. </li>
-                        <li><i class="fas fa-crown"></i> The organizing committee reserves the right to make changes to the event structure, schedule, or rules if necessary</li>
+                        <li><i class="fas fa-crown"></i> 5. Participants must maintain discipline, decorum, and professional behaviour throughout the event.</li>
+                        <li><i class="fas fa-crown"></i> 6. Any form of malpractice, plagiarism, misrepresentation, or misconduct will result in immediate disqualification.</li>
+                        <li><i class="fas fa-crown"></i> 7. Participants must bring their own devices and any other required materials for PPT presentations. The organizers will not be responsible for providing technical accessories.</li>
+                        <li><i class="fas fa-crown"></i> 8. Decisions taken by the judges and organizing committee shall be final and binding.</li>
+                        <li><i class="fas fa-crown"></i> 9. The organizing committee reserves the right to make changes to the event structure, schedule, or rules if necessary.</li>
                     </ul>
                 </div>
                 <button class="toggle-rules-btn" onclick="toggleRules()" id="rulesBtn">READ MORE</button>
@@ -247,22 +179,31 @@ footer {
         </div>
     </section>
 
-   <section class="event-day">
+    <section class="event-day">
         <div class="day-heading">MARCH 10TH</div>
         <div class="events-grid">
             <div class="event-card">
-                <div class="prize-badge">1st: ₹1000 | 2nd: ₹500</div>
-                <div class="card-image-wrapper"><img src="Makeorbreak.jpeg"></div>
+                <div class="prize-badge">
+                    <span class="prize-main">1st: ₹1000* | 2nd: ₹500*</span>
+                    <span class="prize-sub">Subject to Conditions</span>
+                </div>
+                <div class="card-image-wrapper"><img src="https://via.placeholder.com/400x200?text=Make+or+Break"></div>
                 <div class="card-content"><h3>Make or Break</h3><button class="know-more-btn" onclick="openModal('Make or Break')">KNOW MORE</button></div>
             </div>
             <div class="event-card">
-                <div class="prize-badge">1st: ₹1000 | 2nd: ₹500</div>
-                <div class="card-image-wrapper"><img src="QUIZPRENEUR.jpeg"></div>
+                <div class="prize-badge">
+                    <span class="prize-main">1st: ₹1000* | 2nd: ₹500*</span>
+                    <span class="prize-sub">Subject to Conditions</span>
+                </div>
+                <div class="card-image-wrapper"><img src="https://via.placeholder.com/400x200?text=Quizpreneur"></div>
                 <div class="card-content"><h3>Quizpreneur</h3><button class="know-more-btn" onclick="openModal('Quizpreneur')">KNOW MORE</button></div>
             </div>
             <div class="event-card">
-                <div class="prize-badge">1st: ₹1000 | 2nd: ₹500</div>
-                <div class="card-image-wrapper"><img src="BehindtheBrand.jpeg"></div>
+                <div class="prize-badge">
+                    <span class="prize-main">1st: ₹1000* | 2nd: ₹500*</span>
+                    <span class="prize-sub">Subject to Conditions</span>
+                </div>
+                <div class="card-image-wrapper"><img src="https://via.placeholder.com/400x200?text=Behind+the+Brand"></div>
                 <div class="card-content"><h3>Behind the Brand</h3><button class="know-more-btn" onclick="openModal('Behind the Brand')">KNOW MORE</button></div>
             </div>
         </div>
@@ -272,28 +213,41 @@ footer {
         <div class="day-heading">MARCH 11TH</div>
         <div class="events-grid">
             <div class="event-card">
-                <div class="prize-badge">1st: ₹1000 | 2nd: ₹500</div>
-                <div class="card-image-wrapper"><img src="BIZAUCTION.jpeg"></div>
+                <div class="prize-badge">
+                    <span class="prize-main">1st: ₹1000* | 2nd: ₹500*</span>
+                    <span class="prize-sub">Subject to Conditions</span>
+                </div>
+                <div class="card-image-wrapper"><img src="https://via.placeholder.com/400x200?text=Biz+Auction"></div>
                 <div class="card-content"><h3>Biz Auction</h3><button class="know-more-btn" onclick="openModal('Biz Auction')">KNOW MORE</button></div>
             </div>
             <div class="event-card">
-                <div class="prize-badge">1st: ₹1000 | 2nd: ₹500</div>
-                <div class="card-image-wrapper"><img src="Decisiontable.jpeg"></div>
+                <div class="prize-badge">
+                    <span class="prize-main">1st: ₹1000* | 2nd: ₹500*</span>
+                    <span class="prize-sub">Subject to Conditions</span>
+                </div>
+                <div class="card-image-wrapper"><img src="https://via.placeholder.com/400x200?text=Decision+Table"></div>
                 <div class="card-content"><h3>Decision Table</h3><button class="know-more-btn" onclick="openModal('Decision Table')">KNOW MORE</button></div>
             </div>
             <div class="event-card">
-                <div class="prize-badge">1st: ₹1000 | 2nd: ₹500</div>
-                <div class="card-image-wrapper"><img src="IdentityUnleashed.jpeg"></div>
+                <div class="prize-badge">
+                    <span class="prize-main">1st: ₹1000* | 2nd: ₹500*</span>
+                    <span class="prize-sub">Subject to Conditions</span>
+                </div>
+                <div class="card-image-wrapper"><img src="https://via.placeholder.com/400x200?text=Identity+Unleashed"></div>
                 <div class="card-content"><h3>Identity Unleashed</h3><button class="know-more-btn" onclick="openModal('Identity Unleashed')">KNOW MORE</button></div>
             </div>
         </div>
     </section>
 
-    <section class="master-reg-container">
+    <div class="disclaimer-text">
+        * Prize money listed is the maximum potential award and is subject to event participation rules, sponsor terms, and evaluation criteria.
+    </div>
+
+    <section class="master-reg-container" id="regSection">
         <a href="register.html" class="master-reg-btn">REGISTER NOW</a>
     </section>
 
-<button class="floating-reg-btn" id="floatingBtn" onclick="scrollToRegister()">
+    <button class="floating-reg-btn" id="floatingBtn" onclick="scrollToRegister()">
         <i class="fas fa-user-plus"></i>
     </button>
 
@@ -306,40 +260,31 @@ footer {
     </div>
 
     <footer id="contact">
-    <div class="footer-main-grid">
-        <div class="footer-column">
-            <h4>GET IN TOUCH</h4>
-            <p style="margin-bottom: 10px;">
-                EMAIL: <a href="mailto:rkmvcechelon26@gmail.com" class="action-link">rkmvcechelon26@gmail.com</a>
-            </p>
-            <p>
-                PHONE: <a href="tel:+919677836433" class="action-link">+91 96778 36433</a>
-            </p>
-        </div>
-
-        <div class="footer-column right-assigned">
-            <h4>VISIT US</h4>
-            <p>Ramakrishna Mission Vivekananda College</p>
-            <p>Mylapore, Chennai – 600004</p>
-            <a href="https://maps.google.com/?q=Ramakrishna+Mission+Vivekananda+College+Mylapore" target="_blank" class="maps-btn">
-                VIEW ON GOOGLE MAPS
-            </a>
-            <div class="social-icons">
-                <a href="https://www.instagram.com/echelon_26.official/" target="_blank" rel="noopener noreferrer" class="social-icon"> <i class="fab fa-instagram"></i></a>
-                <a href="https://whatsapp.com/channel/0029VbC9cs0LSmbf7WBFN905" class="social-icon" aria-label="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
+        <div class="footer-main-grid">
+            <div class="footer-column">
+                <h4>GET IN TOUCH</h4>
+                <p>EMAIL: <a href="mailto:rkmvcechelon26@gmail.com" class="action-link">rkmvcechelon26@gmail.com</a></p>
+                <p>PHONE: <a href="tel:+919677836433" class="action-link">+91 96778 36433</a></p>
+            </div>
+            <div class="footer-column right-assigned">
+                <h4>VISIT US</h4>
+                <p>Ramakrishna Mission Vivekananda College</p>
+                <p>Mylapore, Chennai – 600004</p>
+                <a href="#" class="maps-btn">VIEW ON GOOGLE MAPS</a>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
-    <script>
+    </footer>
 
-        const content = {
+    <script>
+const content = {
             "Make or Break": `
-               <div class="modal-section-title">📌 EVENT SNAPSHOT</div>
+                <div class="modal-section-title">📌 EVENT SNAPSHOT</div>
                 <div class="snapshot-grid">
-                    <div class="snapshot-box"><i class="fas fa-people-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-user"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
                     <div class="snapshot-box"><i class="fas fa-clock"></i><div class="snapshot-info"><strong>Analysis Time</strong><span>20 minutes</span></div></div>
                     <div class="snapshot-box"><i class="fas fa-comments"></i><div class="snapshot-info"><strong>Panel Interaction Time</strong><span>5 minutes</span></div></div>
                 </div>
@@ -348,7 +293,7 @@ footer {
                     <li>Each team must consist of a minimum of 2 and a maximum of 4 participants.</li>
                     <li>Every team will be assigned a fictional struggling startup.</li>
                     <li>The event will be conducted on a slot-based system, allotted on a first-come, first-served basis.</li>
-                    <li>Teams must choose one of the following strategic decisions: – Pivot – Merge – Sell – Exit</li>
+                    <li>Teams must choose one of the following strategic decisions:<br>&emsp;– Pivot<br>&emsp;– Merge<br>&emsp;– Sell<br>&emsp;– Exit</li>
                     <li>Teams will be given 20 minutes to analyse the situation and finalize their decision. Volunteers will collect the submitted decisions at the end of this period.</li>
                     <li>Each team will be allotted 5 minutes to justify their decision before the judges (investors).</li>
                     <li>The decision of the judges shall be final and binding on all participants.</li>
@@ -357,9 +302,9 @@ footer {
             "Quizpreneur": `
                 <div class="modal-section-title">📌 EVENT SNAPSHOT</div>
                 <div class="snapshot-grid">
-                    <div class="snapshot-box"><i class="fas fa-people-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-user"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
                     <div class="snapshot-box"><i class="fas fa-layer-group"></i><div class="snapshot-info"><strong>Format</strong><span>Three rounds</span></div></div>
-                    <div class="snapshot-box"><i class="fas fa-mobile-screen-button"></i><div class="snapshot-info"><strong>Device Requirement</strong><span>Mobile phone (quiz participation only)</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-mobile-alt"></i><div class="snapshot-info"><strong>Device Requirement</strong><span>Mobile phone (quiz participation only)</span></div></div>
                 </div>
                 <div class="modal-section-title">Event Structure</div>
                 <ul class="modal-list">
@@ -372,10 +317,10 @@ footer {
                 </ul>`,
 
             "Behind the Brand": `
-               <div class="modal-section-title">📌 EVENT SNAPSHOT</div>
+                <div class="modal-section-title">📌 EVENT SNAPSHOT</div>
                 <div class="snapshot-grid">
-                    <div class="snapshot-box"><i class="fas fa-people-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
-                    <div class="snapshot-box"><i class="fas fa-bullhorn"></i><div class="snapshot-info"><strong>Research Allocation</strong><span>Brand assigned four days prior to the event date</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-user"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-search"></i><div class="snapshot-info"><strong>Research Allocation</strong><span>Brand assigned four days prior to the event date</span></div></div>
                     <div class="snapshot-box"><i class="fas fa-calendar-check"></i><div class="snapshot-info"><strong>Submission Deadline</strong><span>9th March 2026, 9:00 A.M.</span></div></div>
                 </div>
                 <div class="modal-section-title">Event Structure</div>
@@ -392,16 +337,16 @@ footer {
                     <li>The decision of the judges shall be final and binding on all participants.</li>
                 </ul>
                 <div class="modal-section-title">Presentation Requirement</div>
-                <p style="margin-bottom:10px;">Teams must analyse and present:</p>
+                <p style="color:var(--cream); margin-bottom:10px;">Teams must analyse and present:</p>
                 <ul class="modal-list">
                     <li>How the strategy succeeded (in case of success), or</li>
                     <li>Why it failed and propose suitable alternative solutions (in case of failure).</li>
                 </ul>`,
 
             "Biz Auction": `
-               <div class="modal-section-title">📦 Event Snapshot</div>
+                <div class="modal-section-title">📦 Event Snapshot</div>
                 <div class="snapshot-grid">
-                    <div class="snapshot-box"><i class="fas fa-people-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>4 Members</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-user"></i><div class="snapshot-info"><strong>Team Size</strong><span>4 Members</span></div></div>
                     <div class="snapshot-box"><i class="fas fa-wallet"></i><div class="snapshot-info"><strong>Total Budget</strong><span>₹100 Crores</span></div></div>
                     <div class="snapshot-box"><i class="fas fa-building"></i><div class="snapshot-info"><strong>Minimum Companies</strong><span>7</span></div></div>
                     <div class="snapshot-box"><i class="fas fa-chart-line"></i><div class="snapshot-info"><strong>Maximum Companies</strong><span>14</span></div></div>
@@ -415,10 +360,13 @@ footer {
                     <li>Each team must acquire at least 7 and at most 14 companies.</li>
                 </ul>
                 <div class="modal-section-title">🏢 Company Information</div>
-                <p style="margin-bottom:10px;">Each company profile includes: Industry, Past 5-Year CAGR (Return), and Risk Category (Low / Medium / High) with multiplier.</p>
+                <p style="color:var(--cream); margin-bottom:10px;">Each company profile includes:</p>
                 <ul class="modal-list">
-                    <li>Participants may review all company details before the auction begins.</li>
+                    <li>Industry</li>
+                    <li>Past 5-Year CAGR (Return)</li>
+                    <li>Risk Category (Low / Medium / High) with multiplier</li>
                 </ul>
+                <p style="color:var(--cream); margin-top:10px;">Participants may review all company details before the auction begins.</p>
                 <div class="modal-section-title">💰 Budget Allocation (Mandatory)</div>
                 <ul class="modal-list">
                     <li>Each team receives ₹100 Crores virtual capital.</li>
@@ -426,7 +374,8 @@ footer {
                     <li>Remaining funds will be used for Bidding towards company to be auctioned.</li>
                 </ul>
                 <div class="modal-section-title">⚠️ Risk Framework</div>
-                <p style="margin-bottom:10px;">Each company is assigned a risk multiplier. <strong>Effective Return = CAGR × Risk Multiplier</strong></p>
+                <p style="color:var(--cream);">Each company is assigned a risk multiplier.</p>
+                <p style="color:var(--gold); font-weight:bold; margin:10px 0;">Effective Return = CAGR × Risk Multiplier</p>
                 <div class="modal-section-title">🔨 Auction Rules</div>
                 <ul class="modal-list">
                     <li>Bidding will be conducted in a live open (IPL-style) format.</li>
@@ -435,6 +384,7 @@ footer {
                     <li>The highest bidder wins 100% ownership of the company.</li>
                 </ul>
                 <div class="modal-section-title">📊 Evaluation Criteria</div>
+                <p style="color:var(--cream); margin-bottom:10px;">Teams will be evaluated based on:</p>
                 <ul class="modal-list">
                     <li>Highest total portfolio value</li>
                     <li>Portfolio diversification</li>
@@ -448,9 +398,9 @@ footer {
             "Decision Table": `
                 <div class="modal-section-title">📌 EVENT SNAPSHOT</div>
                 <div class="snapshot-grid">
-                    <div class="snapshot-box"><i class="fas fa-people-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
-                    <div class="snapshot-box"><i class="fas fa-pen-to-square"></i><div class="snapshot-info"><strong>Preparation Time</strong><span>30 minutes</span></div></div>
-                    <div class="snapshot-box"><i class="fas fa-person-chalkboard"></i><div class="snapshot-info"><strong>Presentation Time</strong><span>5 minutes</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-user"></i><div class="snapshot-info"><strong>Team Size</strong><span>Minimum of 2 and maximum of 4 participants</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-pen-nib"></i><div class="snapshot-info"><strong>Preparation Time</strong><span>30 minutes</span></div></div>
+                    <div class="snapshot-box"><i class="fas fa-chalkboard-teacher"></i><div class="snapshot-info"><strong>Presentation Time</strong><span>5 minutes</span></div></div>
                 </div>
                 <div class="modal-section-title">Event Structure</div>
                 <ul class="modal-list">
@@ -460,7 +410,7 @@ footer {
                     <li>A total of 30 minutes will be allotted for case analysis and preparation of the PowerPoint (PPT) presentation.</li>
                 </ul>
                 <div class="modal-section-title">Analysis Requirement</div>
-                <p style="margin-bottom:10px;">Teams must:</p>
+                <p style="color:var(--cream); margin-bottom:10px;">Teams must:</p>
                 <ul class="modal-list">
                     <li>Identify the core problem.</li>
                     <li>Assess associated risks and consequences.</li>
@@ -484,8 +434,7 @@ footer {
                     <li>All proposed solutions must be practical, feasible, and supported by logical justification.</li>
                     <li>The decision of the judging panel shall be final and binding.</li>
                 </ul>`,
-
-            "Identity Unleashed": ` `
+            "Identity Unleashed": `<p>Details coming soon...</p>`
         };
 
         function openModal(t) {
@@ -495,33 +444,41 @@ footer {
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() { 
-            document.getElementById('eventModal').style.display = 'none'; 
-            document.body.style.overflow = 'auto'; 
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         function toggleRules() {
             const extra = document.getElementById('hidden-rules');
             const btn = document.getElementById('rulesBtn');
-            // If maxHeight is not set or is 0px
-            if (!extra.style.maxHeight || extra.style.maxHeight === '0px') { 
-                extra.style.maxHeight = extra.scrollHeight + "px"; 
-                btn.innerText = 'READ LESS'; 
-            } else { 
-                extra.style.maxHeight = '0px'; 
-                btn.innerText = 'READ MORE'; 
+            if (!extra.style.maxHeight || extra.style.maxHeight === '0px') {
+                extra.style.maxHeight = extra.scrollHeight + "px";
+                btn.innerText = 'READ LESS';
+            } else {
+                extra.style.maxHeight = '0px';
+                btn.innerText = 'READ MORE';
             }
         }
 
+        function scrollToRegister() {
+            document.getElementById('regSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Logic to hide floating button when register section is visible
+        const floatingBtn = document.getElementById('floatingBtn');
+        const regSection = document.getElementById('regSection');
+
+        const observerOptions = { root: null, threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('.event-card, .rules-container').forEach(el => observer.observe(el));
-        
-        window.onclick = (e) => { 
-            if(e.target.id == 'eventModal') closeModal(); 
-        };
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { floatingBtn.classList.add('hidden'); } 
+                else { floatingBtn.classList.remove('hidden'); }
+            });
+        }, observerOptions);
+
+        observer.observe(regSection);
+        window.onclick = (e) => { if(e.target.id == 'eventModal') closeModal(); };
     </script>
 </body>
 </html>
