@@ -419,38 +419,50 @@
                 </ul>`,
 
             "Identity Unleashed": ` `
-};
-        function openModal(t) {
-            document.getElementById('modalTitle').innerText = t;
-            document.getElementById('modalBody').innerHTML = content[t] || "<p>Details coming soon...</p>";
-            document.getElementById('eventModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() { document.getElementById('eventModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function toggleRules() {
-            const extra = document.getElementById('hidden-rules');
-            const btn = document.getElementById('rulesBtn');
-            if (extra.style.maxHeight && extra.style.maxHeight !== '0px') { extra.style.maxHeight = '0px'; btn.innerText = 'READ MORE'; } 
-            else { extra.style.maxHeight = extra.scrollHeight + "px"; btn.innerText = 'READ LESS'; }
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.event-card, .rules-container').forEach(el => observer.observe(el));
-        window.onclick = (e) => { if(e.target.id == 'eventModal') closeModal(); };
-      function scrollToRegister() {
-    const regSection = document.querySelector('.master-reg-container');
-    if (regSection) {
-        regSection.scrollIntoView({ behavior: 'smooth' });
+};function openModal(t) {
+        document.getElementById('modalTitle').innerText = t;
+        document.getElementById('modalBody').innerHTML = content[t] || "<p>Details coming soon...</p>";
+        document.getElementById('eventModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
-}
+
+    function closeModal() { 
+        document.getElementById('eventModal').style.display = 'none'; 
+        document.body.style.overflow = 'auto'; 
+    }
+
+    function toggleRules() {
+        const extra = document.getElementById('hidden-rules');
+        const btn = document.getElementById('rulesBtn');
+        if (extra.style.maxHeight && extra.style.maxHeight !== '0px') { 
+            extra.style.maxHeight = '0px'; 
+            btn.innerText = 'READ MORE'; 
+        } else { 
+            extra.style.maxHeight = extra.scrollHeight + "px"; 
+            btn.innerText = 'READ LESS'; 
+        }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.event-card, .rules-container').forEach(el => observer.observe(el));
+
+    window.onclick = (e) => { if(e.target.id == 'eventModal') closeModal(); };
+
+    function scrollToRegister() {
+        const regSection = document.querySelector('.master-reg-container');
+        if (regSection) {
+            regSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
     </script>
   <button class="floating-reg-btn" onclick="scrollToRegister()" title="Register Now">
     <i class="fas fa-user-plus"></i>
 </button>
 </body>
 </html>
+
 
 
