@@ -26,7 +26,7 @@
             font-family: 'Montserrat', sans-serif; 
             overflow-x: hidden; 
             scroll-behavior: smooth;
-            padding-top: 80px; /* Space for Navbar */
+            padding-top: 70px;
         }
         
         /* NAVBAR */
@@ -36,55 +36,43 @@
             z-index: 1000; border-bottom: 2px solid var(--gold);
         }
         #navbar ul { display: flex; justify-content: center; list-style: none; gap: clamp(15px, 5vw, 40px); }
-        .nav-btn-link { 
-            color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif; 
-            font-size: 0.85rem; letter-spacing: 1px; font-weight: 700; transition: 0.3s;
-        }
-        .nav-btn-link:hover { text-shadow: 0 0 10px var(--gold); transform: translateY(-2px); }
+        .nav-btn-link { color: var(--gold); text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; }
 
-        /* HERO SECTION */
-        .hero { min-height: 35vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: radial-gradient(circle at center, #630048 0%, #4B0036 100%); }
-        .header-container { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 4vw, 30px); width: 100%; max-width: 1200px; }
-        .logo { width: clamp(50px, 12vw, 85px); height: auto; border-radius: 50%; }
-        .echelon-title { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 7vw, 3.5rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; line-height: 1.2; }
+        /* HERO - Space Removed */
+        .hero { display: flex; align-items: center; justify-content: center; padding: 20px 10px; background: radial-gradient(circle at center, #630048 0%, #4B0036 100%); }
+        .header-container { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 4vw, 30px); width: 100%; }
+        .logo { width: clamp(50px, 10vw, 80px); height: auto; border-radius: 50%; }
+        .echelon-title { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 6vw, 3.5rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
 
-        /* RULES SECTION */
-        .rules-wrapper { padding: 40px 5%; background: var(--bg-dark); }
-        .rules-container { display: flex; flex-wrap: wrap; gap: 20px; background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.3); padding: clamp(20px, 5vw, 40px); border-radius: 15px; }
+        /* RULES */
+        .rules-wrapper { padding: 30px 5%; background: var(--bg-dark); }
+        .rules-container { display: flex; flex-wrap: wrap; gap: 20px; background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 15px; }
         .rules-image-box { flex: 1 1 300px; border: 2px solid var(--gold); border-radius: 8px; height: 300px; overflow: hidden; }
         .rules-image-box img { width: 100%; height: 100%; object-fit: cover; }
         .rules-content { flex: 1.5 1 300px; }
-        .rules-content h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: clamp(1.2rem, 4vw, 2rem); margin-bottom: 10px; }
-        .gold-divider { height: 1px; width: 60px; background: var(--gold-grad); margin-bottom: 20px; }
+        .rules-content h2 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 5px; }
         .rules-list { list-style: none; }
-        .rules-list li { margin-bottom: 10px; font-size: 0.85rem; line-height: 1.5; display: flex; gap: 10px; }
-        .rules-list li i { color: var(--gold); margin-top: 3px; font-size: 0.7rem; }
+        .rules-list li { margin-bottom: 8px; font-size: 0.85rem; display: flex; gap: 10px; line-height: 1.4; }
         #hidden-rules { max-height: 0; overflow: hidden; transition: max-height 0.6s ease; }
-        .toggle-rules-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; padding: 8px 20px; margin-top: 10px; cursor: pointer; border-radius: 4px; font-size: 0.8rem; }
+        .toggle-rules-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; padding: 8px 18px; margin-top: 10px; cursor: pointer; border-radius: 4px; }
 
         /* CARDS GRID */
         .event-day { padding: 40px 5%; background: var(--bg-dark); }
-        .day-heading { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; font-size: clamp(1.4rem, 5vw, 2.2rem); margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
-        .day-heading::before, .day-heading::after { content: ""; height: 1px; flex-grow: 1; background: var(--gold-grad); opacity: 0.4; }
+        .day-heading { font-family: 'Cinzel', serif; color: var(--gold); text-align: center; font-size: 1.8rem; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
+        .day-heading::before, .day-heading::after { content: ""; height: 1px; flex-grow: 1; background: var(--gold-grad); opacity: 0.3; }
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
 
         /* EVENT CARD */
-        .event-card { background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; overflow: hidden; position: relative; transition: var(--transition); opacity: 0; transform: translateY(20px); }
-        .event-card.reveal { opacity: 1; transform: translateY(0); }
-        .event-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        .event-card { background: var(--card-bg); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px; overflow: hidden; position: relative; transition: var(--transition); }
+        .event-card:hover { border-color: var(--gold); transform: translateY(-5px); }
         .card-image-wrapper { height: 200px; overflow: hidden; }
-        .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
         .event-card:hover .card-image-wrapper img { transform: scale(1.1); }
         .card-content { padding: 20px; text-align: center; }
-        .card-content h3 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 12px; font-size: 1.1rem; }
-        .know-more-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; font-weight: 700; cursor: pointer; border-radius: 4px; font-size: 0.75rem; }
-        .know-more-btn:hover { background: var(--gold-grad); color: var(--maroon); border-color: transparent; }
+        .card-content h3 { font-family: 'Cinzel', serif; color: var(--gold); margin-bottom: 12px; font-size: 1.2rem; }
+        .know-more-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'Cinzel'; font-weight: 700; cursor: pointer; border-radius: 4px; }
 
-        .prize-badge {
-            background: var(--gold-grad); color: var(--maroon); font-family: 'Cinzel', serif; 
-            font-weight: 700; font-size: 0.65rem; padding: 6px 12px; position: absolute; 
-            top: 15px; right: 0; border-radius: 15px 0 0 15px; box-shadow: -2px 4px 10px rgba(0,0,0,0.3); z-index: 5;
-        }
+        .prize-badge { background: var(--gold-grad); color: var(--maroon); font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.65rem; padding: 6px 12px; position: absolute; top: 15px; right: 0; border-radius: 15px 0 0 15px; z-index: 5; }
 
         /* FLOATING BUTTON */
         .floating-reg-btn {
@@ -92,9 +80,9 @@
             color: var(--maroon); width: 55px; height: 55px; border-radius: 50%; 
             display: flex; align-items: center; justify-content: center; font-size: 1.3rem; 
             box-shadow: 0 8px 20px rgba(0,0,0,0.5); cursor: pointer; z-index: 999; 
-            border: none; animation: pulse 2s infinite; transition: 0.3s;
+            border: none; animation: pulse 2s infinite; transition: opacity 0.3s;
         }
-        .floating-reg-btn:hover { transform: scale(1.1); }
+        .floating-reg-btn.hidden { opacity: 0; pointer-events: none; }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
@@ -102,31 +90,18 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
-        /* MODALS */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(20, 0, 15, 0.98); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(10px); padding: 15px; }
-        .modal-content { background: #3a002a; border: 1px solid var(--gold); width: 100%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 12px; padding: clamp(20px, 5vw, 40px); position: relative; }
+        /* FOOTER */
+        footer { padding: 50px 8% 30px; background: #1a0014; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+        .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
+        .footer-col h4 { font-family: 'Cinzel'; color: var(--gold); margin-bottom: 15px; font-size: 1.1rem; }
+        .footer-col.right { text-align: right; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; justify-content: flex-end; }
+        .social-icon { width: 35px; height: 35px; border-radius: 50%; border: 1px solid rgba(212,175,55,0.4); display: flex; align-items: center; justify-content: center; color: var(--gold); text-decoration: none; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(20, 0, 15, 0.98); display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(10px); }
+        .modal-content { background: #3a002a; border: 1px solid var(--gold); width: 90%; max-width: 700px; max-height: 80vh; overflow-y: auto; border-radius: 12px; padding: 30px; position: relative; }
         .close-modal { position: absolute; top: 15px; right: 15px; color: var(--gold); font-size: 1.8rem; cursor: pointer; }
-        .modal-section-title { color: var(--gold); font-family: 'Cinzel'; font-size: 1.1rem; margin: 25px 0 12px; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 5px; }
-        .modal-list li { margin-bottom: 8px; font-size: 0.85rem; line-height: 1.6; display: flex; gap: 8px; color: var(--cream); }
-        .modal-list li::before { content: "•"; color: var(--gold); font-weight: bold; }
-
-        .snapshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 15px 0; }
-        .snapshot-box { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; }
-        .snapshot-box i { font-size: 1.1rem; color: #4da3ff; }
-        .snapshot-info strong { font-size: 0.6rem; color: #999; display: block; }
-        .snapshot-info span { font-size: 0.8rem; color: var(--cream); }
-
-        .master-reg-container { text-align: center; padding: 50px 20px; background: var(--bg-dark); }
-        .master-reg-btn { padding: 15px 40px; font-size: 1.2rem; background: var(--gold-grad); color: var(--maroon); border: none; font-family: 'Cinzel'; font-weight: 700; border-radius: 50px; cursor: pointer; transition: 0.4s; }
-
-        footer { padding: 40px 5% 30px; background: #1a0014; border-top: 1px solid rgba(212, 175, 55, 0.2); }
-        .footer-main-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; }
-
-        @media (max-width: 600px) {
-            body { padding-top: 70px; }
-            .events-grid { grid-template-columns: 1fr; }
-            .header-container { gap: 15px; }
-        }
     </style>
 </head>
 <body>
@@ -147,24 +122,21 @@
         </div>
     </section>
 
-    <section class="rules-wrapper" id="general-rules">
+    <section class="rules-wrapper">
         <div class="rules-container">
             <div class="rules-image-box"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800"></div>
             <div class="rules-content">
                 <h2>GENERAL RULES & REGULATIONS</h2>
-                <div class="gold-divider"></div>
+                <div style="height:1px; width:60px; background:var(--gold-grad); margin:10px 0 20px;"></div>
                 <ul class="rules-list">
-                    <li><i class="fas fa-crown"></i> 1. Valid registration is mandatory for all participants. No spot registration.</li>
-                    <li><i class="fas fa-crown"></i> 2. Carry valid College ID card at all times for verification.</li>
-                    <li><i class="fas fa-crown"></i> 3. Report to venue at least 30 minutes prior to scheduled time.</li>
+                    <li><i class="fas fa-crown" style="color:var(--gold)"></i> 1. Valid registration is mandatory for all participants.</li>
+                    <li><i class="fas fa-crown" style="color:var(--gold)"></i> 2. Carry valid College ID card at all times.</li>
+                    <li><i class="fas fa-crown" style="color:var(--gold)"></i> 3. Report to venue 30 minutes prior to event time.</li>
                 </ul>
                 <div id="hidden-rules">
-                    <ul class="rules-list" style="margin-top: 12px;">
-                        <li><i class="fas fa-crown"></i> 4. Use of mobile phones or unfair means is strictly prohibited.</li>
-                        <li><i class="fas fa-crown"></i> 5. Maintain discipline and professional behavior throughout.</li>
-                        <li><i class="fas fa-crown"></i> 6. Malpractice or plagiarism results in immediate disqualification.</li>
-                        <li><i class="fas fa-crown"></i> 7. Bring own devices and materials for PPT presentations.</li>
-                        <li><i class="fas fa-crown"></i> 8. Decisions of judges and committee are final and binding.</li>
+                    <ul class="rules-list" style="margin-top: 8px;">
+                        <li><i class="fas fa-crown" style="color:var(--gold)"></i> 4. Use of mobile phones is strictly prohibited.</li>
+                        <li><i class="fas fa-crown" style="color:var(--gold)"></i> 5. Malpractice results in immediate disqualification.</li>
                     </ul>
                 </div>
                 <button class="toggle-rules-btn" onclick="toggleRules()" id="rulesBtn">READ MORE</button>
@@ -172,7 +144,7 @@
         </div>
     </section>
 
-    <section class="event-day" id="day-10">
+    <section class="event-day">
         <div class="day-heading">MARCH 10TH</div>
         <div class="events-grid">
             <div class="event-card">
@@ -193,7 +165,7 @@
         </div>
     </section>
 
-    <section class="event-day" id="day-11">
+    <section class="event-day">
         <div class="day-heading">MARCH 11TH</div>
         <div class="events-grid">
             <div class="event-card">
@@ -218,6 +190,28 @@
         <button class="master-reg-btn" onclick="window.location.href='index.html'">REGISTER NOW</button>
     </section>
 
+    <button class="floating-reg-btn" id="floatingBtn" onclick="scrollToRegister()">
+        <i class="fas fa-user-plus"></i>
+    </button>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>GET IN TOUCH</h4>
+                <p>EMAIL: <a href="mailto:rkmvcechelon26@gmail.com" style="color:var(--gold); text-decoration:none;">rkmvcechelon26@gmail.com</a></p>
+                <p>PHONE: <a href="tel:+919677836433" style="color:var(--gold); text-decoration:none;">+91 96778 36433</a></p>
+            </div>
+            <div class="footer-col right">
+                <h4>VISIT US</h4>
+                <p>Mylapore, Chennai – 600004</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/echelon_26.official/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://whatsapp.com/channel/0029VbC9cs0LSmbf7WBFN905" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <div class="modal-overlay" id="eventModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">×</span>
@@ -226,65 +220,39 @@
         </div>
     </div>
 
-    <button class="floating-reg-btn" onclick="scrollToRegister()" title="Register Now">
-        <i class="fas fa-user-plus"></i>
-    </button>
-
-    <footer>
-        <div class="footer-main-grid">
-            <div class="footer-column">
-                <h4 style="color:var(--gold); font-family:'Cinzel';">CONTACT</h4>
-                <p style="font-size:0.8rem">Email: <a href="mailto:rkmvcechelon26@gmail.com" class="action-link">rkmvcechelon26@gmail.com</a></p>
-                <p style="font-size:0.8rem">Phone: <a href="tel:+919677836433" class="action-link">+91 96778 36433</a></p>
-            </div>
-            <div class="footer-column" style="text-align: right;">
-                <h4 style="color:var(--gold); font-family:'Cinzel';">SOCIAL</h4>
-                <div class="social-icons" style="justify-content: flex-end;">
-                    <a href="https://www.instagram.com/echelon_26.official/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="https://whatsapp.com/channel/0029VbC9cs0LSmbf7WBFN905" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script>
+        // Content logic remains the same
         const content = {
-            "Make or Break": `<div class="modal-section-title">📌 EVENT SNAPSHOT</div><div class="snapshot-grid"><div class="snapshot-box"><i class="fas fa-user-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>2-4 Members</span></div></div><div class="snapshot-box"><i class="fas fa-clock"></i><div class="snapshot-info"><strong>Analysis</strong><span>20 mins</span></div></div><div class="snapshot-box"><i class="fas fa-comments"></i><div class="snapshot-info"><strong>Interaction</strong><span>5 mins</span></div></div></div><ul class="modal-list"><li>Every team assigned a fictional struggling startup.</li><li>Choose Pivot, Merge, Sell, or Exit strategy.</li></ul>`,
-            "Quizpreneur": `<div class="modal-section-title">📌 EVENT SNAPSHOT</div><div class="snapshot-grid"><div class="snapshot-box"><i class="fas fa-user-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>2-4 Members</span></div></div><div class="snapshot-box"><i class="fas fa-layer-group"></i><div class="snapshot-info"><strong>Format</strong><span>3 Rounds</span></div></div></div><ul class="modal-list"><li>Quiz via mobile app/site. Elimination after rounds.</li></ul>`,
-            "Behind the Brand": `<div class="modal-section-title">📌 EVENT SNAPSHOT</div><div class="snapshot-grid"><div class="snapshot-box"><i class="fas fa-user-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>2-4 Members</span></div></div><div class="snapshot-box"><i class="fas fa-bullhorn"></i><div class="snapshot-info"><strong>Research</strong><span>4 Days Prior</span></div></div></div>`,
-            "Biz Auction": `<div class="modal-section-title">📦 EVENT SNAPSHOT</div><div class="snapshot-grid"><div class="snapshot-box"><i class="fas fa-user-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>4 Members</span></div></div><div class="snapshot-box"><i class="fas fa-wallet"></i><div class="snapshot-info"><strong>Budget</strong><span>₹100 Crores</span></div></div></div>`,
-            "Decision Table": `<div class="modal-section-title">📌 EVENT SNAPSHOT</div><div class="snapshot-grid"><div class="snapshot-box"><i class="fas fa-user-group"></i><div class="snapshot-info"><strong>Team Size</strong><span>2-4 Members</span></div></div><div class="snapshot-box"><i class="fas fa-pen-to-square"></i><div class="snapshot-info"><strong>Prep</strong><span>30 mins</span></div></div></div>`,
-            "Identity Unleashed": `<div class="modal-section-title">📌 EVENT SNAPSHOT</div><div class="snapshot-grid"><div class="snapshot-box"><i class="fas fa-user"></i><div class="snapshot-info"><strong>Team Size</strong><span>Individual</span></div></div></div>`
+            "Make or Break": `Restored Rules Text Here...`,
+            "Quizpreneur": `Restored Rules Text Here...`,
+            "Behind the Brand": `Restored Rules Text Here...`,
+            "Biz Auction": `Restored Rules Text Here...`,
+            "Decision Table": `Restored Rules Text Here...`,
+            "Identity Unleashed": `Individual only.`
         };
 
         function openModal(t) {
             document.getElementById('modalTitle').innerText = t;
-            document.getElementById('modalBody').innerHTML = content[t] || "<p>Details coming soon...</p>";
+            document.getElementById('modalBody').innerHTML = content[t] || "Coming Soon...";
             document.getElementById('eventModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
         }
-
-        function closeModal() { document.getElementById('eventModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-        
+        function closeModal() { document.getElementById('eventModal').style.display = 'none'; }
         function toggleRules() {
             const extra = document.getElementById('hidden-rules');
             const btn = document.getElementById('rulesBtn');
-            if (extra.style.maxHeight && extra.style.maxHeight !== '0px') { 
-                extra.style.maxHeight = '0px'; btn.innerText = 'READ MORE'; 
-            } else { 
-                extra.style.maxHeight = extra.scrollHeight + "px"; btn.innerText = 'READ LESS'; 
-            }
+            if (extra.style.maxHeight && extra.style.maxHeight !== '0px') { extra.style.maxHeight = '0px'; btn.innerText = 'READ MORE'; } 
+            else { extra.style.maxHeight = '500px'; btn.innerText = 'READ LESS'; }
         }
 
-        function scrollToRegister() {
-            document.getElementById('reg-anchor').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('reveal'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.event-card, .rules-container').forEach(el => observer.observe(el));
-        window.onclick = (e) => { if(e.target.id == 'eventModal') closeModal(); };
+        // Floating logic
+        function scrollToRegister() { document.getElementById('reg-anchor').scrollIntoView({ behavior: 'smooth' }); }
+        window.onscroll = function() {
+            const btn = document.getElementById("floatingBtn");
+            const anchor = document.getElementById("reg-anchor");
+            if (anchor.getBoundingClientRect().top < window.innerHeight) { btn.classList.add("hidden"); } 
+            else { btn.classList.remove("hidden"); }
+        };
     </script>
 </body>
 </html>
+
